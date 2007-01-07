@@ -1,0 +1,13 @@
+<% @page_title = 'Current Posts' -%>
+<% @blog_controls << link_to('Create A New Post', :action => :new) -%>
+<% @blog_controls << link_to('Log Out', :controller => 'login', :action => 'logout') -%>
+
+<% if @posts.empty? -%>
+	<h3>Welcome to Stack's Wiki</h3>
+	<p>
+		This place has just been initialized, so you'll want to log in 
+		and create some content
+	</p>
+<% else -%>
+	<%= render :partial => 'post', :collection => @posts %>
+<% end -%>

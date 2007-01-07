@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" version="-//W3C//DTD XHTML 1.1//EN" xml:lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<title><%= @page_title || 'Blog' %></title>
+	<%= stylesheet_link_tag 'reset' %>
+	<%= stylesheet_link_tag 'fonts.css' %>
+	<%= stylesheet_link_tag 'layout.css' %>
+	<%= stylesheet_link_tag 'blog.css' %>
+	<%= javascript_include_tag :defaults %>
+</head>
+<body>
+	
+	<div id="header">
+		<ul id="menu" class="clearfix">
+			<li><%= link_to "#{image_tag('16x16/blog.png', :size => '16x16')} Blog", { :controller => 'blog' }, { :class => 'current' } %></li>
+			<li><%= link_to "#{image_tag('16x16/articles.png', :size => '16x16')} Articles", { :controller => 'articles' } %></li>
+			<li><%= link_to "#{image_tag('16x16/pictures.png', :size => '16x16')} Pictures", { :controller => 'pictures' } %></li>
+			<li><%= link_to "#{image_tag('16x16/files.png', :size => '16x16')} Files", { :controller => 'files' } %></li>
+			<% if session[:user].nil? -%>
+				<li><%= link_to_remote "#{image_tag('16x16/admin.png', :size => '16x16')} Log In", { :url => { :action => :show_login } }, { :href => url_for(:controller => 'login') } %></li>
+			<% else -%>
+				<li><%= link_to "#{image_tag('16x16/admin.png', :size => '16x16')} Admin", { :controller => 'admin' } %></li>
+			<% end -%>
+		</ul>
+	</div>
+	
+	<div id="container" class="clearfix">
+		<div id="content">
+			<%= yield %>
+		</div>
+		
+		<div id="sidebar">
+			<div class="section">
+				<h2>About</h2>
+				This is the site of Stephen Gerstacker.  You can learn more <a href="#">About My Site</a>
+				 if you'd like.
+			</div>
+			
+			<% unless @blog_links.blank? -%>
+				<h3>Blog Links</h3>
+				<ul>
+					<% @blog_links.each { |link| -%>
+						<li><%= link %></li>
+					<% } -%>
+				</ul>
+			<% end -%>
+			
+			<% unless session[:user].nil? || @blog_controls.blank? -%>
+				<h3>Blog Controls</h3>
+				<ul>
+					<% @blog_controls.each { |control| -%>
+						<li><%= control %></li>
+					<% } -%>
+				</ul>
+			<% end -%>
+			
+			<h3>Categories</h3>
+			
+		</div>
+
+	</div>
+
+</body>
+</html>

@@ -1,0 +1,6 @@
+<div id="post_<%= post.id %>" class="post">
+	<h3 class="post_header"><%= link_to_post post %></h3>
+	<p class="post_info"><%= post.created_on.strftime '%B %d, %Y @ %H:%M' %></p>
+	<%= post.formatted_text %>
+	<p class="post_tags"></p>
+</div>

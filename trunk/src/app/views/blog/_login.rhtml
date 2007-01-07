@@ -1,0 +1,10 @@
+<div id="login" style="display: none">
+	<%= form_tag :controller => 'login', :action => :index %>
+		<label for="username">Username:</label>
+		<%= text_field_tag :username, '', { :class => 'fixed' } %>
+		<label for="password">Password:</label>
+		<%= password_field_tag :password, '', { :class => 'fixed' } %>
+		<%= submit_tag 'Log In', :class => 'submit' %>
+		or <%= link_to_function 'cancel', "new Effect.Fade('login', { afterFinish:function() { $('login').remove(); } })"%>
+	<%= end_form_tag %>
+</div>
