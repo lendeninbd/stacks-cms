@@ -1,0 +1,73 @@
+#container a { color: #900; }
+
+#login { 
+	background-color: #900;
+	border-bottom: 1px solid #600;
+	color: #fff;
+}
+
+#login a { color: #fff; }
+
+#content h3 {
+	border-bottom: 1px solid #999;
+	color: #900;
+	font-family: Georgia, Verdana, Helvetica, Sans-Serif;
+	font-size: 152%;
+	margin-bottom: 0.5em;
+}
+
+/* P O S T S */
+.post { margin-bottom: 2em; }
+
+.post p { margin-bottom: 1em; }
+
+.post hr { 
+	border: 0;
+	background-color: #666;
+	color: #666;
+	height: 1px;
+	width: 90%; 
+}
+
+.post pre {
+	background-color: #efefef;
+	font-size: 77%;
+	margin-bottom: 1em;
+	padding: 0.5em;
+}
+
+.post ul, .post ol { 
+	margin-bottom: 1em;
+	margin-left: 1.5em; 
+}
+
+.post ul li { list-style: disc; }
+
+.post_header h3 {
+	border-bottom: 1px solid #999;
+	color: #900;
+	font-family: Georgia, Verdana, Helvetica, Sans-Serif;
+	font-size: 152%;
+}
+
+.post_header a { text-decoration: none; }
+
+.post_info { 
+	color: #999;
+	font-size: 77%;
+	margin-top: 3px;
+}
+
+.post_tags {
+	font-size: 85%;
+	font-style: italic;
+	text-align: right;
+}
+
+.post_tags a:link, .post_tags a:visited {
+	text-decoration: none;
+}
+
+.post_tags a:hover, .post_tags a:active {
+	text-decoration: underline;
+}
