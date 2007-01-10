@@ -14,7 +14,8 @@
 		<%= f.text_area :raw_text, :class => 'fixed', :cols => 60, :rows => 24 %>
 	</p>
 	<p>
+		<label for="tag_list">Tags:</label><br />
+		<%= text_field_tag 'tag_list', @post.tags.collect {|t| t.name }.join(' '), :autocomplete => 'off' %>
 		<%= submit_tag 'Create Post', :class => 'submit' %>
-		or <%= link_to 'cancel', session[:history] %>
 	</p>
 <% end -%>

@@ -10,4 +10,12 @@ module BlogHelper
     }
   end
   
+  def link_to_tag(tag)
+    link_to tag.name, { :action => :tag, :tag => tag.name }
+  end
+  
+  def tag_cloud(tags)
+    tags.collect { |tag| link_to_tag tag }.join(', ')
+  end
+  
 end

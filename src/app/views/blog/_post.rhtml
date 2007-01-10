@@ -2,5 +2,7 @@
 	<h3 class="post_header"><%= link_to_post post %></h3>
 	<p class="post_info"><%= post.created_on.strftime '%B %d, %Y @ %H:%M' %></p>
 	<%= post.formatted_text %>
-	<p class="post_tags"></p>
+	<% unless post.tags.blank? -%>
+		<p class="post_tags">Tagged under <%= post.tags.collect { |t| link_to_tag t }.to_sentence(:connector => '&', :skip_last_comma => true)%></p>
+	<% end -%>
 </div>

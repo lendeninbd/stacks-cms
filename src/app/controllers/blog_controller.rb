@@ -13,6 +13,7 @@ class BlogController < ApplicationController
     @post = Post.find(params[:id])
     if request.post?
       @post.attributes = params[:post]
+      @post.tag_with params[:tag_list]
       @post.edited_on = Time.now
       if @post.save
         redirect_to_url session[:history]
@@ -26,6 +27,7 @@ class BlogController < ApplicationController
     @post = Post.new
     if request.post?
       @post.attributes = params[:post]
+      @post.tag_with params[:tag_list]
       if @post.save
         redirect_to :action => :index
       else
@@ -36,10 +38,12 @@ class BlogController < ApplicationController
   
   def index
     @posts = Post.find(:all, :limit => 5, :order => 'created_on DESC')
+    @tags = Tag.find(:all).uniq
   end
   
   def view
     @post = Post.find(params[:id])
+    @tags = Tag.find(:all).uniq
   end
   
   private

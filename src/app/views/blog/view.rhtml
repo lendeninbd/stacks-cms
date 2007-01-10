@@ -1,4 +1,5 @@
 <% @page_title = @post.title -%>
+<% @blog_controls << link_to('Create A New Post', :action => :new) -%>
 <% @blog_controls << link_to('Delete This Post', { :action => :delete, :id => @post }, :confirm => "Are you sure you want to delete '#{@post.title}'")%>
 <% @blog_controls << link_to('Edit This Post', :action => :edit, :id => @post) -%>
 <% @blog_controls << link_to('Log Out', :controller => 'login', :action => 'logout') -%>
