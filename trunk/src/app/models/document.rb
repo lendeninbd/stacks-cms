@@ -1,5 +1,7 @@
 class Document < ActiveRecord::Base
   
+  acts_as_taggable
+  
   validates_presence_of :title
   validates_presence_of :raw_text
   

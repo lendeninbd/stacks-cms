@@ -154,7 +154,7 @@ body {
 	vertical-align: -21%;
 }
 
-.fieldWithErrors { display: inline };
+.fieldWithErrors { display: inline; }
 
 .fixed {
 	font-family: Monaco, "Courier New", Monospace;

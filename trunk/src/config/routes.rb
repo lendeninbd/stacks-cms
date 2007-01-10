@@ -9,6 +9,7 @@ ActionController::Routing::Routes.draw do |map|
   # map.purchase 'products/:id/purchase', :controller => 'catalog', :action => 'purchase'
   # This route can be invoked with purchase_url(:id => product.id)
   map.connect 'blog/:year/:month/:day/:id', :controller => 'blog', :action => 'view'
+  map.connect 'blog/tag/:tag', :controller => 'blog', :action => 'tag'
   
   map.connect 'article/view/:name', :controller => 'article', :action => 'view'
   
