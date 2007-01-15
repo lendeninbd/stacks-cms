@@ -10,12 +10,12 @@
 		<%= f.text_field :title, :class => 'fixed' %>
 	</p>
 	<p>
-		<label for="post_raw_text">Raw Text:</label><br />
-		<%= f.text_area :raw_text, :class => 'fixed', :cols => 60, :rows => 24 %>
+		<label for="post_markdown_text">Markdown Text:</label><br />
+		<%= f.text_area :markdown_text, :class => 'fixed', :cols => 60, :rows => 24 %>
 	</p>
 	<p>
 		<label for="tag_list">Tags:</label><br />
-		<%= text_field_tag 'tag_list', @post.tags.collect {|t| t.name }.join(' '), :autocomplete => 'off' %>
+		<%= text_field_tag 'tag_list', @post.tags.collect {|t| t.name }.join(' '), :autocomplete => 'off', :class => 'fixed' %>
 		<%= submit_tag 'Create Post', :class => 'submit' %>
 	</p>
 <% end -%>

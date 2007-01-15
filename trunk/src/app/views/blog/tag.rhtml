@@ -1,0 +1,7 @@
+<% @page_title = @tag.name -%>
+<% @blog_controls << link_to('Create A New Post', :action => :new) -%>
+<% @blog_controls << link_to('Log Out', :controller => 'login', :action => 'logout') -%>
+
+<ol>
+<%= render :partial => 'post_summary', :collection => @posts %>
+</ol>

@@ -7,10 +7,11 @@ ActiveRecord::Schema.define(:version => 5) do
   create_table "documents", :force => true do |t|
     t.column "type", :string
     t.column "title", :string
+    t.column "markdown_text", :text
     t.column "raw_text", :text
     t.column "formatted_text", :text
-    t.column "created_on", :datetime
-    t.column "edited_on", :datetime
+    t.column "created_at", :datetime
+    t.column "edited_at", :datetime
   end
 
   create_table "links", :force => true do |t|

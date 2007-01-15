@@ -37,8 +37,14 @@ class BlogController < ApplicationController
   end
   
   def index
-    @posts = Post.find(:all, :limit => 5, :order => 'created_on DESC')
+    @posts = Post.find(:all, :limit => 5, :order => 'created_at DESC')
     @tags = Tag.find(:all).uniq
+  end
+  
+  def tag
+    @tag = Tag.find(:first, :conditions => [ 'name = ?', params[:tag] ])
+    @posts = Post.find_tagged_with(params[:tag])
+    @articles = Post.find_tagged_with(params[:tag])
   end
   
   def view
