@@ -3,11 +3,13 @@ class Document < ActiveRecord::Base
   acts_as_taggable
   
   validates_presence_of :title
-  validates_presence_of :raw_text
+  validates_presence_of :markdown_text
   
   has_many :links, :dependent => :delete_all
   
   before_save :format_text
+  
+  TAG_EXPRESSION = /<[^>]*>/
   
   def after_destroy
     other_links = Link.find(:all, :conditions => [ 'links.title = ?', self.title ], :include => [ :document ])
@@ -31,7 +33,7 @@ class Document < ActiveRecord::Base
   def format_text
     @new_links = []
     
-    formatted_text = BlueCloth.new(self.raw_text).to_html
+    formatted_text = BlueCloth.new(self.markdown_text).to_html
     formatted_text.gsub!(/\[\[([^\]]*?)\]\]/) { |link|
       page = Article.find(:first, :conditions => [ 'title = ?', $1 ])
       if page.nil?
@@ -44,6 +46,8 @@ class Document < ActiveRecord::Base
       
       @@renderer.make_link $1, { :controller => 'article', :action => 'view', :name => $1 }, css_class
     }
+    
+    self.raw_text = formatted_text.gsub(TAG_EXPRESSION, '')
     
     formatted_text
   end
