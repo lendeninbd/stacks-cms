@@ -53,8 +53,8 @@
 			<% end -%>
 			
 			<% unless @tags.blank? -%>
-				<h3>Categories</h3>
-				<%= tag_cloud @tags %>
+				<h3>Tags</h3>
+				<p align="justify"><%= tag_cloud @tags %></p>
 			<% end -%>
 			
 		</div>

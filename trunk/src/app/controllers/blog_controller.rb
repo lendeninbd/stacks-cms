@@ -14,7 +14,7 @@ class BlogController < ApplicationController
     if request.post?
       @post.attributes = params[:post]
       @post.tag_with params[:tag_list]
-      @post.edited_on = Time.now
+      @post.edited_at = Time.now
       if @post.save
         redirect_to_url session[:history]
       else
@@ -38,10 +38,11 @@ class BlogController < ApplicationController
   
   def index
     @posts = Post.find(:all, :limit => 5, :order => 'created_at DESC')
-    @tags = Tag.find(:all).uniq
+    @tags = Tag.find(:all, :order => 'name asc').uniq
   end
   
   def tag
+    @tags = Tag.find(:all, :order => 'name asc').uniq
     @tag = Tag.find(:first, :conditions => [ 'name = ?', params[:tag] ])
     @posts = Post.find_tagged_with(params[:tag])
     @articles = Post.find_tagged_with(params[:tag])
