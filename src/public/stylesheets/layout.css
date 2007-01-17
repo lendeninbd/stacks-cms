@@ -103,6 +103,7 @@ body {
 	width: 210px;
 }
 
+#sidebar a { text-decoration: none; }
 #sidebar h2, #sidebar h3 { font-family: Georgia, Verdana, Helvetica, Sans-Serif; }
 
 #sidebar h2 { font-weight: bold; }
@@ -113,13 +114,14 @@ body {
 	margin-bottom: 0.25em;
 }
 
+#sidebar p { line-height: 1.25em; margin-left: 0.5em; }
+
 #sidebar ul {
-	margin-bottom: 1em;
-	margin-left: 1.5em;
+	margin-bottom: 1.5em;
+	margin-left: 0.5em;
 }
 
 #sidebar ul li { 
-	list-style: disc; 
 	margin-bottom: 0.25em;
 }
 
@@ -129,7 +131,7 @@ body {
 	background-image: url(../images/backgrounds/sidebar_section.gif);
 	background-position: bottom;
 	background-repeat: repeat-x;
-	margin-bottom: 1em;
+	margin-bottom: 1.5em;
 	padding: 5px;
 }
 
@@ -160,6 +162,8 @@ body {
 	font-family: Monaco, "Courier New", Monospace;
 	font-size: 92%;
 }
+
+.grey { background-color: #eee; }
 
 .layout_table td {
 	padding-bottom: 3px;

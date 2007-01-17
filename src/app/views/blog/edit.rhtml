@@ -3,7 +3,7 @@
 <% @blog_controls << link_to('Delete This Post', { :action => :delete, :id => @post }, :confirm => "Are you sure you want to delete '#{@post.title}'")%>
 <% @blog_controls << link_to('Log Out', :controller => 'login', :action => 'logout') -%>
 
-<h3>Edit Post '<%= @post.title %>'</h3>
+<h1>Edit Post '<%= @post.title %>'</h1>
 
 <% form_for :post, @post, :url => { :action => :edit } do |f| %>
 	<p>

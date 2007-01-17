@@ -2,7 +2,7 @@
 <% @blog_controls << link_to('Cancel New Post', session[:history]) -%>
 <% @blog_controls << link_to('Log Out', :controller => 'login', :action => 'logout') -%>
 
-<h3>New Post</h3>
+<h1>New Post</h1>
 
 <% form_for :post, @post, :url => { :action => :new } do |f| %>
 	<p>

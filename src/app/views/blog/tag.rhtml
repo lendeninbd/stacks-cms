@@ -2,6 +2,8 @@
 <% @blog_controls << link_to('Create A New Post', :action => :new) -%>
 <% @blog_controls << link_to('Log Out', :controller => 'login', :action => 'logout') -%>
 
+<h1>What's Tagged Under '<%= @tag.name %>'?</h1>
+
 <ol>
 <%= render :partial => 'post_summary', :collection => @posts %>
 </ol>
