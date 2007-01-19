@@ -1,5 +1,6 @@
 class BlogController < ApplicationController
   
+  before_filter :authorized, :only => [ :edit, :new, :delete ]
   before_filter :set_history, :except => [ :show_login, :new, :edit, :delete ]
   before_filter :setup_page
   
@@ -44,13 +45,13 @@ class BlogController < ApplicationController
   def tag
     @tags = Tag.find(:all, :order => 'name asc').uniq
     @tag = Tag.find(:first, :conditions => [ 'name = ?', params[:tag] ])
-    @posts = Post.find_tagged_with(params[:tag])
-    @articles = Post.find_tagged_with(params[:tag])
+    @posts = Document.find_tagged_with(params[:tag]).reject { |d| d.class != Post }
+    @articles = Document.find_tagged_with(params[:tag]).reject { |d| d.class != Article }
   end
   
   def view
     @post = Post.find(params[:id])
-    @tags = Tag.find(:all).uniq
+    @tags = Tag.find(:all, :order => 'name asc').uniq
   end
   
   private

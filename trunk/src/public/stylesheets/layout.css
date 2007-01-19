@@ -79,22 +79,16 @@ body {
 	padding: 5px;
 }
 
-/*
-#login {
-	background-color: #fff;
-	height: 100px;
-	padding: 5px;
-	position: absolute;
-	right: 0;
-	top: 0;
-	width: 220px;
-}
-*/
-
 #content { 
 	float: left;
 	margin: 10px;
 	width: 550px;
+}
+
+#content h2 {
+	border-bottom: 1px solid #000;
+	font-weight: bold;
+	padding-bottom: 2px;
 }
 
 #sidebar { 

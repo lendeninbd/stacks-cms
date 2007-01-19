@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
     if session[:user]
       @user = session[:user]
     else
-      redirect_to :action => :unauthorized
+      render :text => "Forbidden", :status => 403, :layout => false
     end
   end
   
@@ -20,10 +20,6 @@ class ApplicationController < ActionController::Base
   
   def set_history
     session[:history] = request.request_uri
-  end
-  
-  def unauthorized
-    render :text => "Forbidden", :status => 403, :layout => false
   end
   
 end
