@@ -5,7 +5,7 @@
 	</div>
 <% end -%>
 
-<%= form_tag %>
+<% form_tag do %>
 <table class="layout_table">
 <tr>
 	<td class="right"><label for="username">Username:</label></td>
@@ -29,7 +29,7 @@
 </tr>
 </table>
 
-<%= end_form_tag %>
+<% end -%>
 
 <% if @username.blank? || !request.post? -%>
 	<%= javascript_tag "$('username').focus();" %>

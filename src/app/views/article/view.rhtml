@@ -1,0 +1,6 @@
+<% if @article.blank? -%>
+	<h1>This Page Doesn't Exist, Yet...</h1>
+	<p>If you want to create <em><%= h(params[:title]) %></em>, you'll have to log in first.</p>
+<% else -%>
+
+<% end -%>

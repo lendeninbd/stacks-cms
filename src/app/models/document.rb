@@ -44,7 +44,7 @@ class Document < ActiveRecord::Base
         css_class = 'exists'
       end
       
-      @@renderer.make_link $1, { :controller => 'article', :action => 'view', :name => $1 }, css_class
+      @@renderer.make_link $1, { :controller => 'article', :action => 'view', :title => $1 }, css_class
     }
     
     self.raw_text = formatted_text.gsub(TAG_EXPRESSION, '')
