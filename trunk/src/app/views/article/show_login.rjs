@@ -1,0 +1,2 @@
+page.insert_html :top, :container, :partial => 'login'
+page.visual_effect :appear, :login, :afterFinish => "function() { $('username').focus(); }"

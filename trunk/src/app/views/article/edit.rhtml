@@ -1,0 +1,22 @@
+<% if @new_record 
+	@page_title = "Creating '#{@article.title}'"
+else
+	@page_title = "Editing '#{@article.title}'"
+	@article_controls << link_to('Delete This Post', { :action => :delete, :id => @post }, :confirm => "Are you sure you want to delete '#{@article.title}'")
+end	-%>
+<% @article_controls << link_to('Cancel Post', session[:history]) -%>
+<% @article_controls << link_to('Log Out', :controller => 'login', :action => 'logout') -%>
+
+<h1><%= h(@article.title) %></h1>
+
+<% form_for :article, @article, :url => { :action => :edit } do |f| %>
+	<p>
+		<label for="article_markdown_text">Markdown Text:</label><br />
+		<%= f.text_area :markdown_text, :class => 'fixed', :cols => 60, :rows => 24 %>
+	</p>
+	<p>
+		<label for="tag_list">Tags:</label><br />
+		<%= text_field_tag 'tag_list', @article.tags.collect {|t| t.name }.join(' '), :autocomplete => 'off', :class => 'fixed' %>
+		<%= submit_tag 'Save Post', :class => 'submit' %>
+	</p>
+<% end -%>
