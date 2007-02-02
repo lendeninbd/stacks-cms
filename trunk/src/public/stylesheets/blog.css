@@ -30,9 +30,10 @@
 	width: 90%; 
 }
 
+.post code { font-size: 85%; }
 .post pre {
 	background-color: #efefef;
-	font-size: 77%;
+	font-size: 100%;
 	margin-bottom: 1em;
 	padding: 0.5em;
 }

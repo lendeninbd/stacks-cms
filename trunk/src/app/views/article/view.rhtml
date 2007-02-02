@@ -1,6 +1,19 @@
-<% if @article.blank? -%>
-	<h1>This Page Doesn't Exist, Yet...</h1>
-	<p>If you want to create <em><%= h(params[:title]) %></em>, you'll have to log in first.</p>
-<% else -%>
+<% @page_title = h(params[:title]) -%>
+<% if session[:user] && !@article.blank? -%>
+	<% @article_controls << link_to('Delete This Article', { :action => :delete, :id => @article }, :confirm => "Are you sure you want to delete '#{@article.title}'")%>
+<% end -%>
+<% @article_controls << link_to('Edit This Article', :action => :edit, :title => params[:title]) -%>
+<% @article_controls << link_to('Log Out', :controller => 'login', :action => 'logout') -%>
 
+<% if @article.blank? -%>
+	<h1>This Article Doesn't Exist, Yet...</h1>
+	<% if session[:user] -%>
+		<p>To create this page, go ahead and edit it.</p>
+	<% else -%>
+		<p>If you want to create <em><%= h(params[:title]) %></em>, you'll have to log in first.</p>
+	<% end -%>
+<% else -%>
+	<h1><%= h(@article.title) %></h1>
+	
+	<%= @article.formatted_text %>
 <% end -%>

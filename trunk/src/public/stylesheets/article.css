@@ -17,3 +17,28 @@
 	margin-bottom: 0.5em;
 }
 
+#content p { margin-bottom: 1em; }
+
+#content hr { 
+	border: 0;
+	background-color: #666;
+	color: #666;
+	height: 1px;
+	width: 90%; 
+}
+
+#content code { font-size: 85%; }
+
+#content pre {
+	background-color: #efefef;
+	font-size: 100%;
+	margin-bottom: 1em;
+	padding: 0.5em;
+}
+
+#content ul, #content ol { 
+	margin-bottom: 1em;
+	margin-left: 1.5em; 
+}
+
+#content ul li { list-style: disc; }
