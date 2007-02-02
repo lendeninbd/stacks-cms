@@ -9,11 +9,11 @@ class ArticleController < ApplicationController
     @new_record = @article.new_record?
     
     if request.post?
-      @artile.attributes = params[:article]
+      @article.attributes = params[:article]
       @article.tag_with params[:tag_list]
       if @article.save
-        flash[:notice] = "This article was created successfully" if new_record
-        flash[:notice] = "Changes have been saved to this article" unless new_record
+        flash[:notice] = "This article was created successfully" if @new_record
+        flash[:notice] = "Changes have been saved to this article" unless @new_record
         redirect_to :action => :view, :title => @article.title
       else
         flash[:error] = @article.errors.full_messages.join '<br />'
@@ -27,7 +27,6 @@ class ArticleController < ApplicationController
   
   def view
     @article = Article.find_by_title(params[:title])
-    redirect_to :action => :edit, :title => params[:title] if @article.blank? && session[:user]
   end
   
   private
