@@ -1,0 +1,4 @@
+<div class="article_summary<%= article_summary_counter.even? ? ' grey' : '' %>">
+	<h2><%= link_to h(article_summary.title), :action => :view, :title => article_summary.title %></h2>
+	<%= truncate(article_summary.raw_text, 200) %>
+</div>

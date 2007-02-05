@@ -4,6 +4,12 @@ class ArticleController < ApplicationController
   before_filter :set_history, :except => [ :show_login, :edit, :delete ]
   before_filter :setup_page
   
+  def delete
+    @article = Article.find(params[:id])
+    @article.destroy
+    redirect_to :action => :index
+  end
+  
   def edit
     @article = Article.find_or_initialize_by_title(params[:title])
     @new_record = @article.new_record?
@@ -25,8 +31,16 @@ class ArticleController < ApplicationController
     redirect_to :action => :view, :title => 'Main Page'
   end
   
+  def tag
+    @tags = Tag.find(:all, :order => 'name asc').uniq
+    @tag = Tag.find(:first, :conditions => [ 'name = ?', params[:tag] ])
+    @posts = Document.find_tagged_with(params[:tag]).reject { |d| d.class != Post }
+    @articles = Document.find_tagged_with(params[:tag]).reject { |d| d.class != Article }
+  end
+  
   def view
     @article = Article.find_by_title(params[:title])
+    @tags = Tag.find(:all, :order => 'name asc').uniq
   end
   
   private

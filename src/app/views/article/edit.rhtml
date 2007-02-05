@@ -2,7 +2,7 @@
 	@page_title = "Creating '#{@article.title}'"
 else
 	@page_title = "Editing '#{@article.title}'"
-	@article_controls << link_to('Delete This Article', { :action => :delete, :id => @post }, :confirm => "Are you sure you want to delete '#{@article.title}'")
+	@article_controls << link_to('Delete This Article', { :action => :delete, :id => @article }, :confirm => "Are you sure you want to delete '#{@article.title}'")
 end	-%>
 <% @article_controls << link_to('Cancel Edit', session[:history]) -%>
 <% @article_controls << link_to('Log Out', :controller => 'login', :action => 'logout') -%>

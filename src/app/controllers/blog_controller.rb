@@ -1,8 +1,8 @@
 class BlogController < ApplicationController
   
   before_filter :authorized, :only => [ :edit, :new, :delete ]
-  before_filter :set_history, :except => [ :show_login, :new, :edit, :delete ]
-  before_filter :setup_page
+  before_filter :set_history, :except => [ :show_login, :new, :edit, :delete, :rss ]
+  before_filter :setup_page, :except => [ :show_login, :rss ]
   
   def delete
     @post = Post.find(params[:id])
@@ -24,6 +24,11 @@ class BlogController < ApplicationController
     end
   end
   
+  def index
+    @posts = Post.find(:all, :limit => 5, :order => 'created_at DESC')
+    @tags = Tag.find(:all, :order => 'name asc').uniq
+  end
+  
   def new
     @post = Post.new
     if request.post?
@@ -37,9 +42,10 @@ class BlogController < ApplicationController
     end
   end
   
-  def index
-    @posts = Post.find(:all, :limit => 5, :order => 'created_at DESC')
-    @tags = Tag.find(:all, :order => 'name asc').uniq
+  def rss
+    headers['Content-Type'] = 'application/xml'
+    @posts = Post.find(:all, :order => 'created_at desc', :limit => 10)
+    render :layout => false
   end
   
   def tag

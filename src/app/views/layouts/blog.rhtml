@@ -5,6 +5,7 @@
 	<title><%= @page_title || 'Blog' %></title>
 	<%= javascript_include_tag :defaults %>
 	<%= stylesheet_link_tag 'reset', 'fonts', 'layout', 'blog' %>
+	 <link rel="alternate" type="application/rss+xml" title="Stack's Blog - RSS" href="<%= url_for(:action => :rss) %>"/>
 </head>
 <body>
 	
@@ -12,8 +13,8 @@
 		<ul id="menu" class="clearfix">
 			<li><%= link_to "#{image_tag('16x16/blog.png', :size => '16x16')} Blog", { :controller => 'blog' }, { :class => 'current' } %></li>
 			<li><%= link_to "#{image_tag('16x16/articles.png', :size => '16x16')} Articles", { :controller => 'article' } %></li>
-			<li><%= link_to "#{image_tag('16x16/pictures.png', :size => '16x16')} Pictures", { :controller => 'picture' } %></li>
-			<li><%= link_to "#{image_tag('16x16/files.png', :size => '16x16')} Files", { :controller => 'file' } %></li>
+			<!-- <li><%= link_to "#{image_tag('16x16/pictures.png', :size => '16x16')} Pictures", { :controller => 'picture' } %></li> -->
+			<!-- <li><%= link_to "#{image_tag('16x16/files.png', :size => '16x16')} Files", { :controller => 'file' } %></li> -->
 			<% if session[:user].nil? -%>
 				<li><%= link_to_remote "#{image_tag('16x16/admin.png', :size => '16x16')} Log In", { :url => { :action => :show_login } }, { :href => url_for(:controller => 'login') } %></li>
 			<% else -%>
@@ -56,6 +57,10 @@
 				<h3>Tags</h3>
 				<p><%= tag_cloud @tags %></p>
 			<% end -%>
+			
+			<div align="center">
+				<%= link_to("#{image_tag('22x22/rss.png', :size => '22x22', :alt => 'RSS Feed', :class => 'middle')} RSS Feed", :action => :rss) %>
+			</div>
 			
 		</div>
 
