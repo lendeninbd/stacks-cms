@@ -1,13 +1,14 @@
 module ApplicationHelper
   
-  def link_to_post(post)
+  def link_to_post(post, only_path = true)
     link_to post.title, 
     { :controller => 'blog',
       :action => :view, 
       :year => sprintf("%04d", post.created_at.year), 
       :month => sprintf("%02d", post.created_at.month),
       :day => sprintf("%02d", post.created_at.day),
-      :id => post.id 
+      :id => post.id,
+      :only_path => only_path
     }
   end
   

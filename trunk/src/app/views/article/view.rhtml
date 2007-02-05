@@ -6,14 +6,14 @@
 <% @article_controls << link_to('Log Out', :controller => 'login', :action => 'logout') -%>
 
 <% if @article.blank? -%>
-	<h1>This Article Doesn't Exist, Yet...</h1>
-	<% if session[:user] -%>
-		<p>To create this page, go ahead and edit it.</p>
-	<% else -%>
-		<p>If you want to create <em><%= h(params[:title]) %></em>, you'll have to log in first.</p>
-	<% end -%>
+	<div class="article">
+		<h1 class="article_header">This Article Doesn't Exist, Yet...</h1>
+		<% if session[:user] -%>
+			<p>To create the article <em><%= h(params[:title]) %></em>, go ahead and edit it.</p>
+		<% else -%>
+			<p>If you want to create <em><%= h(params[:title]) %></em>, you'll have to log in first.</p>
+		<% end -%>
+	</div>
 <% else -%>
-	<h1><%= h(@article.title) %></h1>
-	
-	<%= @article.formatted_text %>
+	<%= render :partial => 'article', :object => @article %>
 <% end -%>

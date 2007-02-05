@@ -111,7 +111,7 @@ strong { font-weight: bold; }
 	margin-bottom: 0.25em;
 }
 
-#sidebar p { line-height: 1.25em; margin-left: 0.5em; }
+#sidebar p { line-height: 1.25em; margin-left: 0.5em; margin-bottom: 1em; }
 
 #sidebar ul {
 	margin-bottom: 1.5em;
@@ -167,6 +167,8 @@ strong { font-weight: bold; }
 	padding-right: 5px;
 }
 
+.middle { vertical-align: -35%; }
+
 td.left { text-align: left; }
 td.center { text-align: center; }
 td.right { text-align: right; }
@@ -175,3 +177,16 @@ td.right { text-align: right; }
 	font-weight: bold;
 	padding: 0 2px;
 }
+
+/*~~~ Summaries ~~~*/
+.post_summary, .article_summary {
+	padding: 4px 4px 8px 4px;
+}
+
+.post_summary h2, .article_summary h2 { 
+	border: none !important;
+	font-size: 100%;
+	font-weight: bold;
+}
+
+.post_summary h2 a, .article_summary h2 a { text-decoration: none; }
