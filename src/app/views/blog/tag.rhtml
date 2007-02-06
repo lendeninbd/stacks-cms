@@ -4,13 +4,15 @@
 
 <h1>What's Tagged Under '<%= @tag.name %>'?</h1>
 
-<% unless @posts.blank? -%>
-	<h2>Blog Posts</h2>
-	<%= render :partial => 'post_summary', :collection => @posts %>
-	<br />
-<% end -%>
+<% cache("blog/tag/#{@tag.name}") do -%>
+	<% unless @posts.blank? -%>
+		<h2>Blog Posts</h2>
+		<%= render :partial => 'post_summary', :collection => @posts %>
+		<br />
+	<% end -%>
 	
-<% unless @articles.blank? -%>
-	<h2>Articles</h2>
-	<%= render :partial => 'article/article_summary', :collection => @articles %>
+	<% unless @articles.blank? -%>
+		<h2>Articles</h2>
+		<%= render :partial => 'article/article_summary', :collection => @articles %>
+	<% end -%>
 <% end -%>

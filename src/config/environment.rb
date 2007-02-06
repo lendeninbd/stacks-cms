@@ -53,3 +53,5 @@ end
 # Include your application configuration below
 
 require 'renderer'
+
+ActionController::Base.fragment_cache_store = :file_store, "#{RAILS_ROOT}/tmp/cache"

@@ -10,6 +10,10 @@ class ApplicationController < ActionController::Base
     end
   end
   
+  def get_tags
+    @tags = Tag.find(:all, :order => 'name asc').uniq
+  end
+  
   def show_login
     
   end
