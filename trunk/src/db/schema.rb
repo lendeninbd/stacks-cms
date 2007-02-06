@@ -2,27 +2,27 @@
 # migrations feature of ActiveRecord to incrementally modify your database, and
 # then regenerate this schema definition.
 
-ActiveRecord::Schema.define(:version => 5) do
+ActiveRecord::Schema.define(:version => 4) do
 
   create_table "documents", :force => true do |t|
-    t.column "type", :string
-    t.column "title", :string
-    t.column "markdown_text", :text
-    t.column "raw_text", :text
+    t.column "type",           :string
+    t.column "title",          :string
+    t.column "markdown_text",  :text
+    t.column "raw_text",       :text
     t.column "formatted_text", :text
-    t.column "created_at", :datetime
-    t.column "edited_at", :datetime
+    t.column "created_at",     :datetime
+    t.column "edited_at",      :datetime
   end
 
   create_table "links", :force => true do |t|
     t.column "document_id", :integer
-    t.column "title", :string
-    t.column "exists", :boolean
+    t.column "title",       :string
+    t.column "exists",      :boolean
   end
 
   create_table "taggings", :force => true do |t|
-    t.column "taggable_id", :integer
-    t.column "tag_id", :integer
+    t.column "taggable_id",   :integer
+    t.column "tag_id",        :integer
     t.column "taggable_type", :string
   end
 
@@ -31,8 +31,8 @@ ActiveRecord::Schema.define(:version => 5) do
   end
 
   create_table "users", :force => true do |t|
-    t.column "username", :string
-    t.column "display_name", :string
+    t.column "username",      :string
+    t.column "display_name",  :string
     t.column "password_salt", :string
     t.column "password_hash", :string
   end
