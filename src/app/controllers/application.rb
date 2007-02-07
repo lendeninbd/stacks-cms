@@ -10,8 +10,11 @@ class ApplicationController < ActionController::Base
     end
   end
   
-  def get_tags
-    @tags = Tag.find(:all, :order => 'name asc').uniq
+  def expire_tag_caches(tags)
+    tags.each do |tag| 
+      expire_fragment("blog/tag/#{tag.name}") 
+      expire_fragment("article/tag/#{tag.name}")
+    end
   end
   
   def show_login

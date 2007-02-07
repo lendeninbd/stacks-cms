@@ -3,14 +3,20 @@
 <% @article_controls << link_to('Log Out', :controller => 'login', :action => 'logout') -%>
 
 <h1>What's Tagged Under '<%= @tag.name %>'?</h1>
-	
-<% unless @articles.blank? -%>
-	<h2>Articles</h2>
-	<%= render :partial => 'article_summary', :collection => @articles %>
-	<br />
-<% end -%>
 
-<% unless @posts.blank? -%>
-	<h2>Blog Posts</h2>
-	<%= render :partial => 'blog/post_summary', :collection => @posts %>
+<% if @tag.blank? -%>
+	<p>This tag does not exist.</p>
+<% else -%>
+	<% cache("article/tag/#{@tag.name}") do -%>
+		<% unless @articles.blank? -%>
+			<h2>Articles</h2>
+			<%= render :partial => 'article_summary', :collection => @articles %>
+			<br />
+		<% end -%>
+
+		<% unless @posts.blank? -%>
+			<h2>Blog Posts</h2>
+			<%= render :partial => 'blog/post_summary', :collection => @posts %>
+		<% end -%>
+	<% end -%>
 <% end -%>

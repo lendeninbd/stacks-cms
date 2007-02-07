@@ -52,11 +52,12 @@
 				</ul>
 			<% end -%>
 			
-			<% unless @tags.blank? -%>
-				<h3>Tags</h3>
-				<p><%= tag_cloud @tags %></p>
+			<% if @show_tags -%>
+				<% cache(:controller => 'article', :name => 'tag_cloud') do -%>
+					<h3>Tags</h3>
+					<p><%= tag_cloud %></p>
+				<% end -%>
 			<% end -%>
-			
 		</div>
 
 	</div>

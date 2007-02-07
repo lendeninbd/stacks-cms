@@ -1,9 +1,4 @@
-<% if flash[:error] -%>
-	<div class="error_block">
-		<%= image_tag '16x16/error.png', :alt => 'Error', :size => '16x16', :class => 'middle' %>
-		<%= flash[:error] %>
-	</div>
-<% end -%>
+<%= render :partial => 'error_notice' %>
 
 <% form_tag do %>
 <table class="layout_table">

@@ -16,8 +16,8 @@ module ApplicationHelper
     link_to tag.name, { :action => :tag, :tag => tag.name }
   end
   
-  def tag_cloud(tags)
-    tags.collect { |tag| link_to_tag tag }.join(', ')
+  def tag_cloud()
+    Tag.tags(:order => 'name asc').collect { |tag| link_to_tag tag }.join(', ')
   end
   
 end

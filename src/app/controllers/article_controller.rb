@@ -7,6 +7,7 @@ class ArticleController < ApplicationController
   def delete
     @article = Article.find(params[:id])
     @article.destroy
+    expire_caches
     redirect_to :action => :index
   end
   
@@ -20,6 +21,7 @@ class ArticleController < ApplicationController
       if @article.save
         flash[:notice] = "This article was created successfully" if @new_record
         flash[:notice] = "Changes have been saved to this article" unless @new_record
+        expire_caches
         redirect_to :action => :view, :title => @article.title
       else
         flash[:error] = @article.errors.full_messages.join '<br />'
@@ -32,18 +34,24 @@ class ArticleController < ApplicationController
   end
   
   def tag
-    @tags = Tag.find(:all, :order => 'name asc').uniq
     @tag = Tag.find(:first, :conditions => [ 'name = ?', params[:tag] ])
-    @posts = Document.find_tagged_with(params[:tag]).reject { |d| d.class != Post }
-    @articles = Document.find_tagged_with(params[:tag]).reject { |d| d.class != Article }
+    unless read_fragment("article/tag/#{@tag.name}")
+      @posts = Document.find_tagged_with(params[:tag]).reject { |d| d.class != Post }
+      @articles = Document.find_tagged_with(params[:tag]).reject { |d| d.class != Article }
+    end
   end
   
   def view
     @article = Article.find_by_title(params[:title])
-    @tags = Tag.find(:all, :order => 'name asc').uniq
   end
   
   private
+  def expire_caches
+    expire_fragment(:controller => 'article', :name => 'tag_cloud')
+    expire_fragment(:controller => 'blog', :name => 'tag_cloud')
+    expire_fragment(%r{blog/tag/.*})
+  end
+  
   def setup_page
     @article_controls = []
   end
