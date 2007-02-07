@@ -8,8 +8,10 @@ class BlogController < ApplicationController
   
   def delete
     @post = Post.find(params[:id])
+    tags = @post.tags.dup
     @post.destroy
     expire_caches
+    expire_tag_caches tags
     redirect_to :action => :index
   end
   
@@ -19,8 +21,11 @@ class BlogController < ApplicationController
       @post.attributes = params[:post]
       @post.tag_with params[:tag_list]
       @post.edited_at = Time.now
+      old_tags = @post.tags.dup
       if @post.save
         expire_caches
+        expire_tag_caches @post.tags
+        expire_tag_caches old_tags
         redirect_to_url session[:history]
       else
         flash[:error] = 'You must fix your errors before this post can be updated'
@@ -30,7 +35,6 @@ class BlogController < ApplicationController
   
   def index
     @posts = Post.find(:all, :limit => 5, :order => 'created_at DESC') unless read_fragment(:controller => 'blog', :action => 'index')
-    @tags = get_tags unless read_fragment(:controller => 'blog', :name => 'tag_cloud')
   end
   
   def new
@@ -40,9 +44,10 @@ class BlogController < ApplicationController
       @post.tag_with params[:tag_list]
       if @post.save
         expire_caches
+        expire_tag_caches(@post.tags)
         redirect_to :action => :index
       else
-        flash[:error] = 'You must fix your errors before this post can be saved'
+        flash[:error] = 'You need a title and text to save this post'
       end
     end
   end
@@ -54,7 +59,6 @@ class BlogController < ApplicationController
   end
   
   def tag
-    @tags = get_tags unless read_fragment(:controller => 'blog', :name => 'tag_cloud')
     @tag = Tag.find(:first, :conditions => [ 'name = ?', params[:tag] ])
     unless read_fragment("blog/tag/#{@tag.name}")
       @posts = Document.find_tagged_with(params[:tag]).reject { |d| d.class != Post }
@@ -64,14 +68,13 @@ class BlogController < ApplicationController
   
   def view
     @post = Post.find(params[:id])
-    @tags = get_tags unless read_fragment(:controller => 'blog', :name => 'tag_cloud')
   end
   
   private
   def expire_caches
     expire_fragment(:controller => 'blog', :action => 'index')
     expire_fragment(:controller => 'blog', :name => 'tag_cloud')
-    expire_fragment(%r{blog/tag/.*})
+    expire_fragment(:controller => 'article', :name => 'tag_cloud')
     expire_action(:action => :rss)
   end
   

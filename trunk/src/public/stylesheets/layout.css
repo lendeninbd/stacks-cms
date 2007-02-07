@@ -141,12 +141,10 @@ strong { font-weight: bold; }
 }
 
 .error_block {
-	background-color: #fcd3d3;
-	border-bottom: 1px solid #d01515;
-	border-top: 1px solid #d01515;
-	color: #d01515;
+	background-color: #a00;
+	color: #fff;
 	margin: 0.5em 0;
-	padding: 4px 4px;
+	padding: 5px 4px;
 }
 
 .error_block img {
@@ -168,6 +166,17 @@ strong { font-weight: bold; }
 }
 
 .middle { vertical-align: -35%; }
+
+.notice_block {
+	background-color: #060;
+	color: #fff;
+	margin: 0.5em 0;
+	padding: 5px 4px;
+}
+
+.notice_block img {
+	vertical-align: -21%;
+}
 
 td.left { text-align: left; }
 td.center { text-align: center; }

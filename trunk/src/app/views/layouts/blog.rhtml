@@ -53,10 +53,10 @@
 				</ul>
 			<% end -%>
 			
-			<% cache(:controller => 'blog', :name => 'tag_cloud') do -%>
-				<% unless @tags.blank? -%>
+			<% if @show_tags -%>
+				<% cache(:controller => 'article', :name => 'tag_cloud') do -%>
 					<h3>Tags</h3>
-					<p><%= tag_cloud @tags %></p>
+					<p><%= tag_cloud %></p>
 				<% end -%>
 			<% end -%>
 			

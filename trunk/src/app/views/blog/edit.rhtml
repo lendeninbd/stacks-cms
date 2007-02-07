@@ -20,3 +20,7 @@
 		<%= submit_tag 'Save Post', :class => 'submit' %>
 	</p>
 <% end -%>
+
+<% if request.get? -%>
+	<%= javascript_tag "$('post_title').focus();" %>
+<% end -%>
