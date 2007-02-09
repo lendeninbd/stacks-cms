@@ -5,6 +5,8 @@
 
 <h1>Edit Post '<%= @post.title %>'</h1>
 
+<%= render :partial => 'error_notice' %>
+
 <% form_for :post, @post, :url => { :action => :edit } do |f| %>
 	<p>
 		<label for="post_title">Title:</label><br />

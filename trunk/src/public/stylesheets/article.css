@@ -44,6 +44,17 @@
 
 .article ul li { list-style: disc; }
 
+.article a.missing { color: #595555 !important; }
+.article a.missing:hover { color: #700 !important; }
+
+.article a.external { 
+	background-color: transparent;
+	background-image: url(../images/backgrounds/article_external.png);
+	background-position: right center;
+	background-repeat: no-repeat;
+	padding-right: 7px;
+}
+
 .article_header h3 {
 	border-bottom: 1px solid #999;
 	color: #040;

@@ -24,7 +24,7 @@ class ArticleController < ApplicationController
         expire_caches
         redirect_to :action => :view, :title => @article.title
       else
-        flash[:error] = @article.errors.full_messages.join '<br />'
+        flash[:error] = 'You need text to save this article'
       end
     end
   end

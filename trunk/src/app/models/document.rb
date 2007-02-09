@@ -34,6 +34,7 @@ class Document < ActiveRecord::Base
     @new_links = []
     
     formatted_text = BlueCloth.new(self.markdown_text).to_html
+    formatted_text.gsub!(/<a /, '<a class="external" ')
     formatted_text.gsub!(/\[\[([^\]]*?)\]\]/) { |link|
       page = Article.find(:first, :conditions => [ 'title = ?', $1 ])
       if page.nil?

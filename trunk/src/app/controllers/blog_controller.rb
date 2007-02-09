@@ -28,7 +28,7 @@ class BlogController < ApplicationController
         expire_tag_caches old_tags
         redirect_to_url session[:history]
       else
-        flash[:error] = 'You must fix your errors before this post can be updated'
+        flash[:error] = 'You need a title and text to save this post'
       end
     end
   end
