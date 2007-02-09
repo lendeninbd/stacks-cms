@@ -9,6 +9,8 @@ end	-%>
 
 <h1><%= h(@article.title) %></h1>
 
+<%= render :partial => 'error_notice' %>
+
 <% form_for :article, @article, :url => { :action => :edit } do |f| %>
 	<p>
 		<label for="article_markdown_text">Markdown Text:</label><br />

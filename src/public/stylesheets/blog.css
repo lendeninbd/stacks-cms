@@ -44,6 +44,17 @@
 
 .post ul li { list-style: disc; }
 
+.post a.missing { color: #595555 !important; }
+.post a.missing:hover { color: #700 !important; }
+
+.post a.external { 
+	background-color: transparent;
+	background-image: url(../images/backgrounds/blog_external.png);
+	background-position: right center;
+	background-repeat: no-repeat;
+	padding-right: 8px;
+}
+
 .post_header h3 {
 	border-bottom: 1px solid #999;
 	color: #900;
