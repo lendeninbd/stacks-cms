@@ -1,11 +1,12 @@
 class Document < ActiveRecord::Base
   
   acts_as_taggable
+
+  belongs_to :user
+  has_many :links, :dependent => :delete_all
   
   validates_presence_of :title
   validates_presence_of :markdown_text
-  
-  has_many :links, :dependent => :delete_all
   
   before_save :format_text
   

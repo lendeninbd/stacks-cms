@@ -1,0 +1,70 @@
+<% @page_title = "Users" %>
+
+<h1>Users</h1>
+
+<%= render :partial => 'error_notice', :locals => { :error => flash[:error], :notice => flash[:notice] } %>
+
+<table class="real_table">
+<tr>
+	<th>Username</th>
+	<th>Display Name</th>
+	<th>Email Address</th>
+	<th></th>
+</tr>
+<% @users.each do |user| -%>
+<tr class="<%= cycle('even', 'odd', :name => 'users') %>">
+	<td class="<%= user.disabled? ? 'disabled' : '' %>"><%= user.username %></td>
+	<td class="<%= user.disabled? ? 'disabled' : '' %>"><%= user.display_name %></td>
+	<td class="<%= user.disabled? ? 'disabled' : '' %>"><%= user.email_address %></td>
+	<td>
+		<% if user.can_modify_users? -%>
+			<%= image_tag '16x16/can_modify_users.png', :size => '16x16', :alt => 'Can Modify Users', :title => 'Can Modify Users' %>
+		<% else -%>
+			<%= image_tag '16x16/blank.gif', :size => '16x16' %>
+		<% end -%>
+		<%= link_to image_tag('16x16/edit.png', :size => '16x16', :alt => 'Edit'), { :action => :user, :id => user }, { :title => 'Edit' } %>
+		<% if user.disabled? -%>
+			<%= link_to image_tag('16x16/enable.png', :size => '16x16', :alt => 'Enable'), { :action => :enable, :id => user }, { :title => 'Enable' } %>
+		<% else -%>
+			<%= link_to image_tag('16x16/disable.png', :size => '16x16', :alt => 'Disable'), { :action => :disable, :id => user }, { :title => 'Disable' } %>
+		<% end -%>
+	</td>
+</tr>
+<% end -%>
+</table>
+
+<h1>Add A User</h1>
+
+<%= render :partial => 'error_notice', :locals => { :error => flash[:user_error], :notice => flash[:user_notice] } %>
+
+<% form_for :user, User.new, :url => { :action => :add_user } do |f| -%>
+	<table class="layout_table">
+	<tr>
+		<td class="right"><label for="user_username" class="required">Username:</label></td>
+		<td><%= f.text_field :username, :class => 'fixed' %></td>
+	</tr>
+	<tr>
+		<td class="right"><label for="user_display_name" class="required">Display Name:</label></td>
+		<td><%= f.text_field :display_name, :class => 'fixed' %></td>
+	</tr>
+	<tr>
+		<td class="right"><label for="user_email_address" class="required">Email Address:</label></td>
+		<td><%= f.text_field :email_address, :class => 'fixed' %></td>
+	</tr>
+	<tr>
+		<td class="right"><label for="user_password" class="required">Password:</label></td>
+		<td><%= password_field_tag :password, '', :class => 'fixed' %></td>
+	</tr>
+	<tr>
+		<td></td>
+		<td>
+			<%= f.check_box :can_modify_users %>
+			<lable for="user_can_modify_users" class="required">Can Modify Users?</label>
+		</td>
+	</tr>
+	<tr>
+		<td></td>
+		<td class="right"><%= submit_tag 'Add User' %></td>
+	</tr>
+	</table>
+<% end -%>

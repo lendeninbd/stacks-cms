@@ -42,6 +42,7 @@ class BlogController < ApplicationController
     if request.post?
       @post.attributes = params[:post]
       @post.tag_with params[:tag_list]
+      @post.user = session[:user]
       if @post.save
         expire_caches
         expire_tag_caches(@post.tags)

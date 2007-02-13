@@ -1,6 +1,6 @@
 <div id="article_<%= article.id %>" class="article">
 	<h1 class="article_header"><%= link_to h(article.title), :action => :view, :title => article.title %></h1>
-	<p class="article_info"><%= article.created_at.strftime '%B %d, %Y @ %H:%M' %></p>
+	<p class="article_info">Written by <%= article.user.display_name %> on <%= article.created_at.strftime '%B %d, %Y at %H:%M' %></p>
 	<%= article.formatted_text %>
 	<% unless article.tags.blank? -%>
 		<p class="article_tags">Tagged under <%= article.tags.collect { |t| link_to_tag t }.to_sentence(:connector => '&', :skip_last_comma => true)%></p>

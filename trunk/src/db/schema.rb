@@ -12,6 +12,7 @@ ActiveRecord::Schema.define(:version => 4) do
     t.column "formatted_text", :text
     t.column "created_at",     :datetime
     t.column "edited_at",      :datetime
+    t.column "user_id",        :integer
   end
 
   create_table "links", :force => true do |t|
@@ -31,10 +32,13 @@ ActiveRecord::Schema.define(:version => 4) do
   end
 
   create_table "users", :force => true do |t|
-    t.column "username",      :string
-    t.column "display_name",  :string
-    t.column "password_salt", :string
-    t.column "password_hash", :string
+    t.column "username",         :string
+    t.column "display_name",     :string
+    t.column "email_address",    :string
+    t.column "password_salt",    :string
+    t.column "password_hash",    :string
+    t.column "can_modify_users", :boolean, :default => false
+    t.column "disabled",         :boolean, :default => true
   end
 
 end

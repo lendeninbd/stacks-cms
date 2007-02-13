@@ -179,9 +179,31 @@ strong { font-weight: bold; }
 	vertical-align: -21%;
 }
 
+td.disabled { 
+	color: #666;
+	text-decoration: line-through; 
+}
+
 td.left { text-align: left; }
 td.center { text-align: center; }
 td.right { text-align: right; }
+
+tr.even { background-color: #eee; }
+
+.real_table {
+	border-collapse: collapse;
+	margin-bottom: 1em;
+}
+
+.real_table td {
+	padding: 3px 10px 3px 2px;	
+}
+
+.real_table th { 
+	border-bottom: 1px solid #000;
+	padding: 0 10px 0 0;
+	font-weight: bold;
+}
 
 .submit {
 	font-weight: bold;
