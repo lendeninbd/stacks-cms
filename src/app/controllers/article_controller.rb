@@ -18,6 +18,7 @@ class ArticleController < ApplicationController
     if request.post?
       @article.attributes = params[:article]
       @article.tag_with params[:tag_list]
+      @article.user = session[:user] if @new_record
       if @article.save
         flash[:notice] = "This article was created successfully" if @new_record
         flash[:notice] = "Changes have been saved to this article" unless @new_record

@@ -8,6 +8,7 @@ class CreateDocuments < ActiveRecord::Migration
       t.column :formatted_text, :text
       t.column :created_at,     :datetime
       t.column :edited_at,      :datetime
+      t.column :user_id,        :integer
     end
   end
 

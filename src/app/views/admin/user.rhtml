@@ -1,0 +1,59 @@
+<h1>Editing <%= h(@user.username) %></h1>
+
+<%= render :partial => 'error_notice', :locals => { :error => flash[:error], :notice => flash[:notice] } %>
+
+<% form_for :user, @user do |f| -%>
+	<table class="layout_table">
+	<tr>
+		<td class="right"><label for="user_username" class="required">Username:</label></td>
+		<td><%= f.text_field :username, :class => 'fixed' %></td>
+	</tr>
+	<tr>
+		<td class="right"><label for="user_display_name" class="required">Display Name:</label></td>
+		<td><%= f.text_field :display_name, :class => 'fixed' %></td>
+	</tr>
+	<tr>
+		<td class="right"><label for="user_email_address" class="required">Email Address:</label></td>
+		<td><%= f.text_field :email_address, :class => 'fixed' %></td>
+	</tr>
+	<tr>
+		<td></td>
+		<td>
+			<%= f.check_box :can_modify_users %>
+			<lable for="user_can_modify_users" class="required">Can Modify Users?</label>
+		</td>
+	</tr>
+	<tr>
+		<td></td>
+		<td>
+			<%= f.check_box :disabled %>
+			<lable for="user_disabled" class="required">Disabled?</label>
+		</td>
+	</tr>
+	<tr>
+		<td></td>
+		<td class="right"><%= submit_tag 'Save Changes' %></td>
+	</tr>
+	</table>
+<% end -%>
+
+<h1>Set Password</h1>
+
+<%= render :partial => 'error_notice', :locals => { :error => flash[:password_error], :notice => flash[:password_notice] } %>
+
+<% form_tag :action => :set_password, :id => @user do -%>
+	<table class="layout_table">
+	<tr>
+		<td class="right"><label for="new_password" class="required">New Password:</label></td>
+		<td><%= password_field_tag :new_password, '', :class => 'fixed' %></td>
+	</tr>
+	<tr>
+		<td class="right"><label for="confirm_password" class="required">Confirm Password:</label></td>
+		<td><%= password_field_tag :confirm_password, '', :class => 'fixed' %></td>
+	</tr>
+	<tr>
+		<td></td>
+		<td class="right"><%= submit_tag 'Set Password' %></td>
+	</tr>
+	</table>
+<% end -%>

@@ -3,7 +3,7 @@ class LoginController < ApplicationController
   def index
     if request.post?
       user = User.find(:first, :conditions => [ 'username = ?', params[:username] ])
-      if user.blank? || Digest::SHA256.hexdigest(params[:password] + user.password_salt) != user.password_hash
+      if user.blank? || user.disabled? || Digest::SHA256.hexdigest(params[:password] + user.password_salt) != user.password_hash
         flash[:error] = 'Invalid username or password'
       else
         session[:user] = user

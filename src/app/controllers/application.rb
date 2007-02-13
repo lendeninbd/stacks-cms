@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
     if session[:user]
       @user = session[:user]
     else
-      render :text => "Forbidden", :status => 403, :layout => false
+      render :text => "<h1>Forbidden</h1>", :status => 403
     end
   end
   
