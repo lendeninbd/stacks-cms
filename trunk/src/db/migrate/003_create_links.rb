@@ -3,7 +3,7 @@ class CreateLinks < ActiveRecord::Migration
     create_table :links do |t|
       t.column :document_id,  :integer
       t.column :title,    :string
-      t.column :exists,   :boolean
+      t.column :existing,   :boolean
     end
   end
 

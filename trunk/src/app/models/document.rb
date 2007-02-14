@@ -15,7 +15,7 @@ class Document < ActiveRecord::Base
   def after_destroy
     other_links = Link.find(:all, :conditions => [ 'links.title = ?', self.title ], :include => [ :document ])
     other_links.each { |link| 
-      link.document.save if link.exists? 
+      link.document.save if link.existing? 
     }
   end
   
@@ -24,7 +24,7 @@ class Document < ActiveRecord::Base
     @new_links.each { |link| links.create(link) }
     
     other_links = Link.find(:all, :conditions => [ 'links.title = ?', self.title ], :include => [ :document ])
-    other_links.each { |link| link.document.save unless link.exists? }
+    other_links.each { |link| link.document.save unless link.existing? || link.document.title == self.title }
   end
   
   def before_save
@@ -39,12 +39,13 @@ class Document < ActiveRecord::Base
     formatted_text.gsub!(/\[\[([^\]]*?)\]\]/) { |link|
       page = Article.find(:first, :conditions => [ 'title = ?', $1 ])
       if page.nil?
-        @new_links << { :title => $1, :exists => false }
+        new_link = { :title => $1, :existing => false }
         css_class = 'missing'
       else
-        @new_links << { :title => $1, :exists => true }
+        new_link = { :title => $1, :existing => true }
         css_class = 'exists'
       end
+      @new_links << new_link unless @new_links.include?(new_link)
       
       @@renderer.make_link $1, { :controller => 'article', :action => 'view', :title => $1 }, css_class
     }

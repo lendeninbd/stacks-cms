@@ -30,6 +30,7 @@
 		<div id="sidebar">
 			<h3>Admin Controls</h3>
 			<ul>
+				<li><%= link_to('Non-Existent Links', :action => 'non_existent_pages') %></li>
 				<% if session[:user].can_modify_users? -%>
 					<li><%= link_to('Users', :action => 'users') %></li>
 				<% end -%>
