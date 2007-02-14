@@ -1,0 +1,17 @@
+<% @page_title = 'Non-Existent Pages' -%>
+
+<h1>Non-Existent Pages</h1>
+
+<% if @links.blank? -%>
+	<p>This site's non-existent pages are... non-existent.  Sorry.</p>
+<% else -%>
+	<ol>
+	<% @links.each do |link,documents| -%>
+		<li>
+			<%= link_to link, :controller => 'article', :action => :view, :title => link %>,
+			which is linked by 
+			<%= documents.collect { |document| link_to document, :controller => 'article', :action => :view, :title => document }.to_sentence(:connector => ' and ') %>.
+		</li>
+	<% end -%>
+	</ol>
+<% end -%>

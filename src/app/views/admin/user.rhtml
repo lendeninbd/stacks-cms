@@ -1,3 +1,4 @@
+<% @page_title = "Editing #{h(@user.username)}" %>
 <h1>Editing <%= h(@user.username) %></h1>
 
 <%= render :partial => 'error_notice', :locals => { :error => flash[:error], :notice => flash[:notice] } %>

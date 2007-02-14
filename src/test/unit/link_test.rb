@@ -12,7 +12,7 @@ class LinkTest < Test::Unit::TestCase
     assert article.save
     assert_equal 1, article.links.size
     assert_equal 'test', article.links.first.title
-    assert !article.links.first.exists?
+    assert !article.links.first.existing?
   end
   
   def test_single_post
@@ -20,7 +20,7 @@ class LinkTest < Test::Unit::TestCase
     assert post.save
     assert_equal 1, post.links.size
     assert_equal 'test', post.links.first.title
-    assert !post.links.first.exists?
+    assert !post.links.first.existing?
   end
   
   def test_post_article_creation
@@ -33,7 +33,7 @@ class LinkTest < Test::Unit::TestCase
     post.reload
     assert_equal 1, post.links.size
     assert_equal 'This Article', post.links.first.title
-    assert post.links.first.exists?
+    assert post.links.first.existing?
   end
   
   def test_article_article_creation
@@ -46,7 +46,7 @@ class LinkTest < Test::Unit::TestCase
     article1.reload
     assert_equal 1, article1.links.size
     assert_equal 'Article 2', article1.links.first.title
-    assert article1.links.first.exists?
+    assert article1.links.first.existing?
   end
 
   def test_page_deletion
@@ -61,7 +61,7 @@ class LinkTest < Test::Unit::TestCase
     article1.reload
     assert_equal 1, article1.links.size
     assert_equal 'Article 2', article1.links.first.title
-    assert !article1.links.first.exists?
+    assert !article1.links.first.existing?
   end
   
 end

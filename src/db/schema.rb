@@ -18,7 +18,7 @@ ActiveRecord::Schema.define(:version => 4) do
   create_table "links", :force => true do |t|
     t.column "document_id", :integer
     t.column "title",       :string
-    t.column "exists",      :boolean
+    t.column "existing",    :boolean
   end
 
   create_table "taggings", :force => true do |t|
@@ -38,7 +38,7 @@ ActiveRecord::Schema.define(:version => 4) do
     t.column "password_salt",    :string
     t.column "password_hash",    :string
     t.column "can_modify_users", :boolean, :default => false
-    t.column "disabled",         :boolean, :default => true
+    t.column "disabled",         :boolean, :default => false
   end
 
 end

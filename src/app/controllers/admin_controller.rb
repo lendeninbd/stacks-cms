@@ -54,6 +54,14 @@ class AdminController < ApplicationController
     redirect_to :action => :profile
   end
   
+  def non_existent_pages
+    @links = {}
+    Link.find(:all, :conditions => [ 'existing = ?', false ], :include => [ :document ]).each do |link|
+      @links[link.title] = [] if @links[link.title].nil?
+      @links[link.title] << link.document.title
+    end
+  end
+  
   def profile
     @user = session[:user]
     if request.post?
