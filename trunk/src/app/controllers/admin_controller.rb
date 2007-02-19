@@ -65,7 +65,7 @@ class AdminController < ApplicationController
   def profile
     @user = session[:user]
     if request.post?
-      @user.attributes = param[:user].delete(:can_modify_users)
+      @user.attributes = params[:user].delete(:can_modify_users)
       if @user.save
         session[:user] = @user
         flash[:notice] = 'Changes have been saved to your account'

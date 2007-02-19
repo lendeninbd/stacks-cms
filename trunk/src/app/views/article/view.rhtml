@@ -1,4 +1,5 @@
-<% @page_title = h(params[:title]) -%>
+<% @page_title = "#{h(params[:title])} - #{ARTICLE_TITLE}" -%>
+<% @show_tags = true -%>
 <% if session[:user] && !@article.blank? -%>
 	<% @article_controls << link_to('Delete This Article', { :action => :delete, :id => @article }, :confirm => "Are you sure you want to delete '#{@article.title}'")%>
 <% end -%>

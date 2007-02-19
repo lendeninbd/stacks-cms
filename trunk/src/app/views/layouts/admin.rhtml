@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" version="-//W3C//DTD XHTML 1.1//EN" xml:lang="en">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-	<title><%= @page_title || 'Admin' %></title>
+	<title><%= @page_title || ARTICLE_TITLE %></title>
 	<%= javascript_include_tag :defaults %>
 	<%= stylesheet_link_tag 'reset', 'fonts', 'layout', 'admin' %>
 </head>
@@ -12,13 +12,7 @@
 		<ul id="menu" class="clearfix">
 			<li><%= link_to "#{image_tag('16x16/blog.png', :size => '16x16')} Blog", { :controller => 'blog' } %></li>
 			<li><%= link_to "#{image_tag('16x16/articles.png', :size => '16x16')} Articles", { :controller => 'article' } %></li>
-			<!-- <li><%= link_to "#{image_tag('16x16/pictures.png', :size => '16x16')} Pictures", { :controller => 'picture' } %></li> -->
-			<!-- <li><%= link_to "#{image_tag('16x16/files.png', :size => '16x16')} Files", { :controller => 'file' } %></li> -->
-			<% if session[:user].nil? -%>
-				<li><%= link_to_remote "#{image_tag('16x16/admin.png', :size => '16x16')} Log In", { :url => { :action => :show_login } }, { :href => url_for(:controller => 'login') } %></li>
-			<% else -%>
-				<li><%= link_to "#{image_tag('16x16/admin.png', :size => '16x16')} Admin", { :controller => 'admin' }, { :class => 'current' } %></li>
-			<% end -%>
+			<li><%= link_to "#{image_tag('16x16/admin.png', :size => '16x16')} Admin", { :controller => 'admin' }, { :class => 'current' } %></li>
 		</ul>
 	</div>
 	

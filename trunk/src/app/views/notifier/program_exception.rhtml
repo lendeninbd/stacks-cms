@@ -1,0 +1,9 @@
+An error has occurred on your website:
+
+<%= @exception.message %>
+
+== Backtrace ==
+<%= @exception.backtrace.join '\n' %>
+
+== Params ==
+<%= params.inspect %>

@@ -1,7 +1,7 @@
 <% @page_title = "Editing #{h(@user.username)}" %>
 <h1>Editing <%= h(@user.username) %></h1>
 
-<%= render :partial => 'error_notice', :locals => { :error => flash[:error], :notice => flash[:notice] } %>
+<%= render :partial => 'shared/error_notice', :locals => { :error => flash[:error], :notice => flash[:notice] } %>
 
 <% form_for :user, @user do |f| -%>
 	<table class="layout_table">
@@ -40,7 +40,7 @@
 
 <h1>Set Password</h1>
 
-<%= render :partial => 'error_notice', :locals => { :error => flash[:password_error], :notice => flash[:password_notice] } %>
+<%= render :partial => 'shared/error_notice', :locals => { :error => flash[:password_error], :notice => flash[:password_notice] } %>
 
 <% form_tag :action => :set_password, :id => @user do -%>
 	<table class="layout_table">

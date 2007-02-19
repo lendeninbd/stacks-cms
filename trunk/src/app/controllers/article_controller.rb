@@ -7,7 +7,7 @@ class ArticleController < ApplicationController
   def delete
     @article = Article.find(params[:id])
     @article.destroy
-    expire_caches
+    expire_caches(@article)
     redirect_to :action => :index
   end
   
@@ -22,7 +22,7 @@ class ArticleController < ApplicationController
       if @article.save
         flash[:notice] = "This article was created successfully" if @new_record
         flash[:notice] = "Changes have been saved to this article" unless @new_record
-        expire_caches
+        expire_caches(@article)
         redirect_to :action => :view, :title => @article.title
       else
         flash[:error] = 'You need text to save this article'
@@ -47,14 +47,19 @@ class ArticleController < ApplicationController
   end
   
   private
-  def expire_caches
+  def expire_caches(article)
     expire_fragment(:controller => 'article', :name => 'tag_cloud')
     expire_fragment(:controller => 'blog', :name => 'tag_cloud')
     expire_fragment(%r{blog/tag/.*})
+    
+    article.links_here.each { |link| 
+      expire_fragment(:controller => 'blog', :action => 'index') if link.document.is_on_index? 
+    }
   end
   
   def setup_page
     @article_controls = []
+    @current_controller = controller_name
   end
   
 end

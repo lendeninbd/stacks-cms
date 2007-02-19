@@ -13,22 +13,17 @@ class Document < ActiveRecord::Base
   TAG_EXPRESSION = /<[^>]*>/
   
   def after_destroy
-    other_links = Link.find(:all, :conditions => [ 'links.title = ?', self.title ], :include => [ :document ])
-    other_links.each { |link| 
-      link.document.save if link.existing? 
-    }
+    links_here.each { |link| link.document.save unless link.document == self }
   end
   
   def after_save
     links.clear
     @new_links.each { |link| links.create(link) }
-    
-    other_links = Link.find(:all, :conditions => [ 'links.title = ?', self.title ], :include => [ :document ])
-    other_links.each { |link| link.document.save unless link.existing? || link.document.title == self.title }
+    links_here.each { |link| link.document.save unless link.existing? || link.document == self }
   end
   
   def before_save
-    self.formatted_text = format_text
+    self.formatted_text, self.raw_text = format_text
   end
   
   def format_text
@@ -50,12 +45,15 @@ class Document < ActiveRecord::Base
       @@renderer.make_link $1, { :controller => 'article', :action => 'view', :title => $1 }, css_class
     }
     
-    self.raw_text = formatted_text.gsub(TAG_EXPRESSION, '')
-    
-    formatted_text
+    [ formatted_text, formatted_text.gsub(TAG_EXPRESSION, '') ]
+  end
+  
+  def links_here
+    Link.find(:all, :conditions => [ 'links.title = ?', self.title ], :include => [ :document ])
   end
   
   def self.set_renderer(renderer)
     @@renderer = renderer
   end
+
 end

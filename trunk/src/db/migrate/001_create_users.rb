@@ -10,9 +10,14 @@ class CreateUsers < ActiveRecord::Migration
       # Flags
       t.column :can_modify_users, :boolean, :default => false
       t.column :disabled,         :boolean, :default => false
+      t.column :receives_errors,  :boolean, :default => false
     end
     
-    user = User.create(:username => 'stack', :display_name => 'Stack', :email_address => 'stack@shortround.net', :can_modify_users => true)
+    user = User.create(:username => 'stack', 
+      :display_name => 'Stack', 
+      :email_address => 'stack@shortround.net', 
+      :can_modify_users => true,
+      :receives_errors => true)
     user.password = '12345'
     user.save
   end
