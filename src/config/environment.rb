@@ -14,7 +14,7 @@ Rails::Initializer.run do |config|
   # Settings in config/environments/* take precedence those specified here
   
   # Skip frameworks you're not going to use (only works if using vendor/rails)
-  config.frameworks -= [ :action_web_service, :action_mailer ]
+  config.frameworks -= [ :action_web_service ]
 
   # Add additional load paths for your own custom dirs
   # config.load_paths += %W( #{RAILS_ROOT}/extras )
@@ -53,5 +53,26 @@ end
 # Include your application configuration below
 
 require 'renderer'
+require 'custom_not_found_error'
 
 ActionController::Base.fragment_cache_store = :file_store, "#{RAILS_ROOT}/tmp/cache"
+
+# Titles
+BLOG_TITLE = "Stack's Blog"
+BLOG_FEED_TITLE = "Stack's Blog Feed"
+ARTICLE_TITLE = "Stack's Articles"
+
+# Limits
+POSTS_ON_INDEX = 5
+POSTS_IN_FEED = 20
+
+# Email Settings
+SEND_FROM = 'error@yourdomain.com'
+# config.action_mailer.server_settings = {
+#   :address        => 'smtp.yourdomain.com'
+#   :port           => 25
+#   :domain         => 'yourdomain.com'
+#   :authentication => :login
+#   :user_name      => 'username'
+#   :password       => 'secret'
+# }

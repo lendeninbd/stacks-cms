@@ -39,6 +39,7 @@ ActiveRecord::Schema.define(:version => 4) do
     t.column "password_hash",    :string
     t.column "can_modify_users", :boolean, :default => false
     t.column "disabled",         :boolean, :default => false
+    t.column "receives_errors",  :boolean, :default => false
   end
 
 end

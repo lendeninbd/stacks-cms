@@ -34,7 +34,7 @@ class BlogController < ApplicationController
   end
   
   def index
-    @posts = Post.find(:all, :limit => 5, :order => 'created_at DESC') unless read_fragment(:controller => 'blog', :action => 'index')
+    @posts = Post.find(:all, :limit => POSTS_ON_INDEX, :order => 'created_at DESC') unless read_fragment(:controller => 'blog', :action => 'index')
   end
   
   def new
@@ -55,7 +55,7 @@ class BlogController < ApplicationController
   
   def rss
     headers['Content-Type'] = 'application/xml'
-    @posts = Post.find(:all, :order => 'created_at desc', :limit => 15) unless read_fragment(:controller => 'blog', :action => 'rss')
+    @posts = Post.find(:all, :order => 'created_at desc', :limit => POSTS_IN_FEED) unless read_fragment(:controller => 'blog', :action => 'rss')
     render :layout => false
   end
   
@@ -81,6 +81,7 @@ class BlogController < ApplicationController
   
   def setup_page
     @blog_controls = []
+    @current_controller = controller_name
   end
   
 end

@@ -1,8 +1,8 @@
-<% @page_title = "What's Tagged Under '#{@tag.name}'" -%>
+<% @page_title = "What's Tagged Under #{@tag.name}? - #{ARTICLE_TITLE}" -%>
 <% @article_controls << link_to('Create A New Post', :action => :new) -%>
 <% @article_controls << link_to('Log Out', :controller => 'login', :action => 'logout') -%>
 
-<h1>What's Tagged Under '<%= @tag.name %>'?</h1>
+<h1>What's Tagged Under <%= @tag.name %>?</h1>
 
 <% if @tag.blank? -%>
 	<p>This tag does not exist.</p>

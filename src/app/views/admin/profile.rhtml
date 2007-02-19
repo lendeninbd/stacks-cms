@@ -2,9 +2,9 @@
 
 <h1>Edit Your Profile</h1>
 
-<%= render :partial => 'error_notice', :locals => { :error => flash[:error], :notice => flash[:notice] } %>
+<%= render :partial => 'shared/error_notice', :locals => { :error => flash[:error], :notice => flash[:notice] } %>
 
-<% form_for :user, @user, :url => { :action => :user } do |f| %>
+<% form_for :user, @user, :url => { :action => :profile } do |f| %>
 	<table class="layout_table">
 	<tr>
 		<td class="right"><label for="user_display_name" class="required">Display Name:</label></td>
@@ -23,7 +23,7 @@
 
 <h1>Change Your Password</h1>
 
-<%= render :partial => 'error_notice', :locals => { :error => flash[:password_error], :notice => flash[:password_notice] } %>
+<%= render :partial => 'shared/error_notice', :locals => { :error => flash[:password_error], :notice => flash[:password_notice] } %>
 
 <% form_tag :action => :change_password do -%>
 	<table class="layout_table">

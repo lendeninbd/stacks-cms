@@ -1,2 +1,2 @@
-page.insert_html :top, :container, :partial => 'login'
+page.insert_html :top, :container, :partial => 'shared/login'
 page.visual_effect :appear, :login, :afterFinish => "function() { $('username').focus(); }"

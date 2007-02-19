@@ -44,7 +44,7 @@
 
 .article ul li { list-style: disc; }
 
-.article a.missing { color: #595555 !important; }
+.article a.missing { color: #A79E8C !important; }
 .article a.missing:hover { color: #700 !important; }
 
 .article a.external { 
@@ -67,7 +67,7 @@
 .article_info { 
 	color: #999;
 	font-size: 77%;
-	margin-top: 3px;
+	margin-top: -5px;
 }
 
 .article_summary {

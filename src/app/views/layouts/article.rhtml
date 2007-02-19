@@ -12,8 +12,6 @@
 		<ul id="menu" class="clearfix">
 			<li><%= link_to "#{image_tag('16x16/blog.png', :size => '16x16')} Blog", { :controller => 'blog' } %></li>
 			<li><%= link_to "#{image_tag('16x16/articles.png', :size => '16x16')} Articles", { :controller => 'article' }, { :class => 'current' } %></li>
-			<!-- <li><%= link_to "#{image_tag('16x16/pictures.png', :size => '16x16')} Pictures", { :controller => 'picture' } %></li> -->
-			<!-- <li><%= link_to "#{image_tag('16x16/files.png', :size => '16x16')} Files", { :controller => 'file' } %></li> -->
 			<% if session[:user].nil? -%>
 				<li><%= link_to_remote "#{image_tag('16x16/admin.png', :size => '16x16')} Log In", { :url => { :action => :show_login } }, { :href => url_for(:controller => 'login') } %></li>
 			<% else -%>
@@ -35,7 +33,7 @@
 			</div>
 			
 			<% unless @article_links.blank? -%>
-				<h3>Blog Links</h3>
+				<h3>Article Links</h3>
 				<ul>
 					<% @article_links.each { |link| -%>
 						<li><%= link %></li>
@@ -44,7 +42,7 @@
 			<% end -%>
 			
 			<% unless session[:user].nil? || @article_controls.blank? -%>
-				<h3>Blog Controls</h3>
+				<h3>Article Controls</h3>
 				<ul>
 					<% @article_controls.each { |control| -%>
 						<li><%= control %></li>

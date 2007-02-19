@@ -2,7 +2,7 @@
 
 <h1>Users</h1>
 
-<%= render :partial => 'error_notice', :locals => { :error => flash[:error], :notice => flash[:notice] } %>
+<%= render :partial => 'shared/error_notice', :locals => { :error => flash[:error], :notice => flash[:notice] } %>
 
 <table class="real_table">
 <tr>
@@ -35,7 +35,7 @@
 
 <h1>Add A User</h1>
 
-<%= render :partial => 'error_notice', :locals => { :error => flash[:user_error], :notice => flash[:user_notice] } %>
+<%= render :partial => 'shared/error_notice', :locals => { :error => flash[:user_error], :notice => flash[:user_notice] } %>
 
 <% form_for :user, User.new, :url => { :action => :add_user } do |f| -%>
 	<table class="layout_table">
