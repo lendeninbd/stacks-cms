@@ -60,6 +60,7 @@ ActionController::Base.fragment_cache_store = :file_store, "#{RAILS_ROOT}/tmp/ca
 # Titles
 BLOG_TITLE = "Stack's Blog"
 BLOG_FEED_TITLE = "Stack's Blog Feed"
+BLOG_FEED_DESCRIPTION = "A site of my random tech. articles for my own amusement"
 ARTICLE_TITLE = "Stack's Articles"
 
 # Limits
