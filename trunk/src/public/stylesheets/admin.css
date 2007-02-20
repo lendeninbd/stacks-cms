@@ -1,3 +1,7 @@
+#header {
+	background-image: url(../images/backgrounds/admin_header.png);
+}
+
 #content h1 {
 	border-bottom: 1px solid #999;
 	color: #000;

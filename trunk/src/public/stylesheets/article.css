@@ -1,3 +1,7 @@
+#header {
+	background-image: url(../images/backgrounds/article_header.png);
+}
+
 #container a { color: #040; }
 #container a:hover { color: #020; }
 
