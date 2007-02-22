@@ -28,25 +28,17 @@
 		<div id="sidebar">
 			<div class="section">
 				<h2>About</h2>
-				This is the site of Stephen Gerstacker.  You can learn more <a href="#">About My Site</a>
+				This is the site of Stephen Gerstacker.  You can learn more 
+				<%= link_to 'About My Site',:controller => :article, :action => :view, :title => 'About My Site' %>
 				 if you'd like.
 			</div>
-			
-			<% unless @article_links.blank? -%>
-				<h3>Article Links</h3>
-				<ul>
-					<% @article_links.each { |link| -%>
-						<li><%= link %></li>
-					<% } -%>
-				</ul>
-			<% end -%>
 			
 			<% unless session[:user].nil? || @article_controls.blank? -%>
 				<h3>Article Controls</h3>
 				<ul>
-					<% @article_controls.each { |control| -%>
+					<% @article_controls.each do |control| -%>
 						<li><%= control %></li>
-					<% } -%>
+					<% end -%>
 				</ul>
 			<% end -%>
 			

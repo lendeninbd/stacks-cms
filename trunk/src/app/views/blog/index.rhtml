@@ -2,6 +2,7 @@
 <% @blog_controls << link_to('Create A New Post', :action => :new) -%>
 <% @blog_controls << link_to('Log Out', :controller => 'login', :action => 'logout') -%>
 <% @show_tags = true -%>
+<% @hide_license = true -%>
 
 <% cache(:controller => 'blog', :action => 'index') do -%>
 	<% if @posts.empty? -%>

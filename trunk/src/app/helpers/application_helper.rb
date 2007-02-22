@@ -13,7 +13,7 @@ module ApplicationHelper
   end
   
   def link_to_tag(tag)
-    link_to tag.name, { :controller => @current_controller, :action => :tag, :tag => tag.name }
+    link_to tag.name, { :controller => @current_controller, :action => :tag, :tag => tag.name }, { :rel => 'tag' }
   end
   
   def tag_cloud()

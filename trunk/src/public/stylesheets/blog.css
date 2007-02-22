@@ -89,7 +89,7 @@
 .post_tags {
 	font-size: 85%;
 	font-style: italic;
-	text-align: right;
+	text-align: center;
 }
 
 .post_tags a:link, .post_tags a:visited {

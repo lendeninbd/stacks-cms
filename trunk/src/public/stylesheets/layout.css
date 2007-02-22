@@ -137,6 +137,11 @@ strong { font-weight: bold; }
 	padding: 5px;
 }
 
+#license {
+	font-size: 77%;
+	text-align: center;
+}
+
 .clearfix:after {
 	content: ".";
 	display: block;
