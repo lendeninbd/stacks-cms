@@ -1,6 +1,7 @@
 <% @page_title = "What's Tagged Under #{@tag.name}? - #{ARTICLE_TITLE}" -%>
 <% @article_controls << link_to('Create A New Post', :action => :new) -%>
 <% @article_controls << link_to('Log Out', :controller => 'login', :action => 'logout') -%>
+<% @show_tags = true -%>
 
 <h1>What's Tagged Under <%= @tag.name %>?</h1>
 

@@ -5,4 +5,8 @@
 	<% unless article.tags.blank? -%>
 		<p class="article_tags">Tagged under <%= article.tags.collect { |t| link_to_tag t }.to_sentence(:connector => '&', :skip_last_comma => true)%></p>
 	<% end -%>
+	<div id="license">
+		This work is licensed under a 
+		<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/2.5/">Creative Commons License</a>.
+	</div>
 </div>

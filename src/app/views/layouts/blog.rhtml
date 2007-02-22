@@ -29,25 +29,17 @@
 		<div id="sidebar">
 			<div class="section">
 				<h2>About</h2>
-				This is the site of Stephen Gerstacker.  You can learn more <a href="#">About My Site</a>
+				This is the site of Stephen Gerstacker.  You can learn more 
+				<%= link_to 'About My Site',:controller => :article, :action => :view, :title => 'About My Site' %>
 				 if you'd like.
 			</div>
-			
-			<% unless @blog_links.blank? -%>
-				<h3>Blog Links</h3>
-				<ul>
-					<% @blog_links.each { |link| -%>
-						<li><%= link %></li>
-					<% } -%>
-				</ul>
-			<% end -%>
 			
 			<% unless session[:user].nil? || @blog_controls.blank? -%>
 				<h3>Blog Controls</h3>
 				<ul>
-					<% @blog_controls.each { |control| -%>
+					<% @blog_controls.each do |control| -%>
 						<li><%= control %></li>
-					<% } -%>
+					<% end -%>
 				</ul>
 			<% end -%>
 			
@@ -58,7 +50,7 @@
 				<% end -%>
 			<% end -%>
 			
-			<div align="center">
+			<div>
 				<%= link_to("#{image_tag('22x22/rss.png', :size => '22x22', :alt => 'RSS Feed', :class => 'middle')} Blog Feed", :action => :rss) %>
 			</div>
 			
