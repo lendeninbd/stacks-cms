@@ -17,7 +17,7 @@ module ApplicationHelper
   end
   
   def tag_cloud()
-    Tag.tags(:order => 'name asc').collect { |tag| link_to_tag tag }.join(', ')
+    Tag.find(:all, :order => 'name asc').collect { |tag| link_to_tag tag }.join(', ')
   end
   
   def url_to_post(post, only_path = true)

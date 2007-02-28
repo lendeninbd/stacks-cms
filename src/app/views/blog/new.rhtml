@@ -17,7 +17,7 @@
 	</p>
 	<p>
 		<label for="tag_list">Tags:</label><br />
-		<%= text_field_tag 'tag_list', @post.tags.collect {|t| t.name }.join(' '), :autocomplete => 'off', :class => 'fixed' %>
+		<%= text_field_tag 'tag_list', params[:tag_list], :autocomplete => 'off', :class => 'fixed' %>
 		<%= submit_tag 'Create Post', :class => 'submit' %>
 	</p>
 <% end -%>
