@@ -23,7 +23,7 @@ class ArticleController < ApplicationController
           @article.tag_with params[:tag_list]
           flash[:notice] = "This article was created successfully" if @new_record
           flash[:notice] = "Changes have been saved to this article" unless @new_record
-          expire_caches(@article)
+          expire_caches @article
           redirect_to :action => :view, :title => @article.title
         else
           flash[:error] = 'You need text to save this article'
@@ -41,8 +41,8 @@ class ArticleController < ApplicationController
   def tag
     @tag = Tag.find(:first, :conditions => [ 'name = ?', params[:tag] ])
     unless read_fragment("article/tag/#{@tag.name}")
-      @posts = Post.find_tagged_with(:all => @tag.name, :order => 'document.title')
-      @articles = Article.find_tagged_with(:all => @tag.name, :order => 'document.title')
+      @posts = Document.find_tagged_with(@tag.name).reject { |d| d.class != Post }.sort { |x,y| x.title <=> y.title }
+      @articles = Document.find_tagged_with(@tag.name).reject { |d| d.class != Article }.sort { |x,y| x.title <=> y.title }
     end
   end
   

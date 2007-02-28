@@ -23,7 +23,7 @@ module ActiveRecord
       end
       
       module SingletonMethods
-        def find_tagged_with(list)
+        def find_tagged_with(list)         
           find_by_sql([
             "SELECT #{table_name}.* FROM #{table_name}, tags, taggings " +
             "WHERE #{table_name}.#{primary_key} = taggings.taggable_id " +

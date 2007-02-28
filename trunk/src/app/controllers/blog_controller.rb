@@ -22,10 +22,9 @@ class BlogController < ApplicationController
       @post.edited_at = Time.now
       old_tags = @post.tags.dup
       begin
-        @post.tag params[:tag_list], :separator => ',', :clear => true
+        @post.tag_with params[:tag_list]
         if @post.save
-          expire_caches
-          expire_tag_caches @post.tags
+          expire_caches @post
           expire_tag_caches old_tags
           redirect_to_url session[:history]
         else
@@ -48,9 +47,8 @@ class BlogController < ApplicationController
       @post.attributes = params[:post]
       @post.user = session[:user]
         if @post.save
-          @post.tag params[:tag_list], :clear => true
-          expire_caches
-          expire_tag_caches(@post.tags)
+          @post.tag_with params[:tag_list]
+          expire_caches @post
           redirect_to :action => :index
         else
           flash[:error] = 'You need a title and text to save this post'
@@ -68,8 +66,8 @@ class BlogController < ApplicationController
   def tag
     @tag = Tag.find(:first, :conditions => [ 'name = ?', params[:tag] ])
     unless read_fragment("blog/tag/#{@tag.name}")
-      @posts = Document.find_tagged_with(params[:tag]).reject { |d| d.class != Post }.sort { |x,y| x.title <=> y.title }
-      @articles = Document.find_tagged_with(params[:tag]).reject { |d| d.class != Article }.sort { |x,y| x.title <=> y.title }
+      @posts = Document.find_tagged_with(@tag.name).reject { |d| d.class != Post }.sort { |x,y| x.title <=> y.title }
+      @articles = Document.find_tagged_with(@tag.name).reject { |d| d.class != Article }.sort { |x,y| x.title <=> y.title }
     end
   end
   
@@ -78,11 +76,12 @@ class BlogController < ApplicationController
   end
   
   private
-  def expire_caches
+  def expire_caches(post)
     expire_fragment(:controller => 'blog', :action => 'index')
     expire_fragment(:controller => 'blog', :name => 'tag_cloud')
     expire_fragment(:controller => 'article', :name => 'tag_cloud')
     expire_action(:action => :rss)
+    expire_tag_caches(post.tags)
   end
   
   def setup_page
