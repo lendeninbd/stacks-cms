@@ -19,16 +19,20 @@ class BlogController < ApplicationController
     @post = Post.find(params[:id])
     if request.post?
       @post.attributes = params[:post]
-      @post.tag_with params[:tag_list]
       @post.edited_at = Time.now
       old_tags = @post.tags.dup
-      if @post.save
-        expire_caches
-        expire_tag_caches @post.tags
-        expire_tag_caches old_tags
-        redirect_to_url session[:history]
-      else
-        flash[:error] = 'You need a title and text to save this post'
+      begin
+        @post.tag params[:tag_list], :separator => ',', :clear => true
+        if @post.save
+          expire_caches
+          expire_tag_caches @post.tags
+          expire_tag_caches old_tags
+          redirect_to_url session[:history]
+        else
+          flash[:error] = 'You need a title and text to save this post'
+        end
+      rescue
+        flash[:error] = $!
       end
     end
   end
@@ -40,16 +44,18 @@ class BlogController < ApplicationController
   def new
     @post = Post.new
     if request.post?
+      puts params[:tag_list].inspect
       @post.attributes = params[:post]
-      @post.tag_with params[:tag_list]
       @post.user = session[:user]
-      if @post.save
-        expire_caches
-        expire_tag_caches(@post.tags)
-        redirect_to :action => :index
-      else
-        flash[:error] = 'You need a title and text to save this post'
-      end
+        if @post.save
+          @post.tag params[:tag_list], :clear => true
+          expire_caches
+          expire_tag_caches(@post.tags)
+          redirect_to :action => :index
+        else
+          flash[:error] = 'You need a title and text to save this post'
+        end
+
     end
   end
   
@@ -62,8 +68,8 @@ class BlogController < ApplicationController
   def tag
     @tag = Tag.find(:first, :conditions => [ 'name = ?', params[:tag] ])
     unless read_fragment("blog/tag/#{@tag.name}")
-      @posts = Document.find_tagged_with(params[:tag]).reject { |d| d.class != Post }
-      @articles = Document.find_tagged_with(params[:tag]).reject { |d| d.class != Article }
+      @posts = Document.find_tagged_with(params[:tag]).reject { |d| d.class != Post }.sort { |x,y| x.title <=> y.title }
+      @articles = Document.find_tagged_with(params[:tag]).reject { |d| d.class != Article }.sort { |x,y| x.title <=> y.title }
     end
   end
   

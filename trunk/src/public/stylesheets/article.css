@@ -49,7 +49,7 @@
 .article ul li { list-style: disc; }
 
 .article a.missing { color: #A79E8C !important; }
-.article a.missing:hover { color: #700 !important; }
+.article a.missing:hover { color: #020 !important; }
 
 .article a.external { 
 	background-color: transparent;

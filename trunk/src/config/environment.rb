@@ -54,6 +54,8 @@ end
 
 require 'renderer'
 require 'custom_not_found_error'
+require 'digest/sha2'
+require 'taggable'
 
 ActionController::Base.fragment_cache_store = :file_store, "#{RAILS_ROOT}/tmp/cache"
 

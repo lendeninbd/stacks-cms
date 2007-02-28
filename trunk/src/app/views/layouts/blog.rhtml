@@ -5,7 +5,7 @@
 	<title><%= @page_title || BLOG_TITLE %></title>
 	<%= javascript_include_tag :defaults %>
 	<%= stylesheet_link_tag 'reset', 'fonts', 'layout', 'blog' %>
-	 <link rel="alternate" type="application/rss+xml" title="Stack's Blog - RSS" href="<%= url_for(:action => :rss) %>"/>
+	<link rel="alternate" type="application/rss+xml" title="Stack's Blog - RSS" href="<%= url_for(:action => :rss) %>"/>
 </head>
 <body>
 	
@@ -44,7 +44,7 @@
 			<% end -%>
 			
 			<% if @show_tags -%>
-				<% cache(:controller => 'blog', :name => 'tag_cloud') do -%>
+				<% cache(:controller => 'blog', :action => 'index', :name => 'tag_cloud') do -%>
 					<h3>Tags</h3>
 					<p><%= tag_cloud %></p>
 				<% end -%>
