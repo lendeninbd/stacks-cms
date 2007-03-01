@@ -43,7 +43,6 @@ class BlogController < ApplicationController
   def new
     @post = Post.new
     if request.post?
-      puts params[:tag_list].inspect
       @post.attributes = params[:post]
       @post.user = session[:user]
         if @post.save
@@ -66,8 +65,8 @@ class BlogController < ApplicationController
   def tag
     @tag = Tag.find(:first, :conditions => [ 'name = ?', params[:tag] ])
     unless read_fragment("blog/tag/#{@tag.name}")
-      @posts = Document.find_tagged_with(@tag.name).reject { |d| d.class != Post }.sort { |x,y| x.title <=> y.title }
-      @articles = Document.find_tagged_with(@tag.name).reject { |d| d.class != Article }.sort { |x,y| x.title <=> y.title }
+      @posts = Document.find_tagged_with(@tag.name, :conditions => [ 'documents.type = ?', 'Post'], :order => 'documents.title')
+      @articles = Document.find_tagged_with(@tag.name, :conditions => [ 'documents.type = ?', 'Article'], :order => 'documents.title')
     end
   end
   

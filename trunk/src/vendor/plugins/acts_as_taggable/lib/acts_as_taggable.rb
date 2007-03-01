@@ -23,14 +23,16 @@ module ActiveRecord
       end
       
       module SingletonMethods
-        def find_tagged_with(list)         
-          find_by_sql([
-            "SELECT #{table_name}.* FROM #{table_name}, tags, taggings " +
-            "WHERE #{table_name}.#{primary_key} = taggings.taggable_id " +
-            "AND taggings.taggable_type = ? " +
-            "AND taggings.tag_id = tags.id AND tags.name IN (?)",
-            acts_as_taggable_options[:taggable_type], list
-          ])
+        def find_tagged_with(list, options = {})   
+          str  = "SELECT #{table_name}.* FROM #{table_name}, tags, taggings "
+          str += "WHERE (#{table_name}.#{primary_key} = taggings.taggable_id "
+          str += "AND taggings.taggable_type = ? "
+          str += "AND taggings.tag_id = tags.id AND tags.name IN (?)) "
+          str += "AND (#{sanitize_sql(options[:conditions])}) " unless options[:conditions].blank?
+          str += "ORDER BY #{options[:order]}" unless options[:order].blank?
+          
+          query = [ str, acts_as_taggable_options[:taggable_type], list ]
+          find_by_sql(query)
         end
       end
       
