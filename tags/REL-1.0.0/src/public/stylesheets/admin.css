@@ -1,0 +1,14 @@
+#header {
+	background-image: url(../images/backgrounds/admin_header.png);
+}
+
+#content h1 {
+	border-bottom: 1px solid #999;
+	color: #000;
+	font-family: Georgia, Verdana, Helvetica, Sans-Serif;
+	font-size: 152%;
+	margin-bottom: 0.5em;
+}
+
+a { color: #000; }
+a:hover { color: #666; }

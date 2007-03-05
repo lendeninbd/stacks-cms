@@ -1,0 +1,13 @@
+<% unless error.nil? -%>
+	<div class="error_block hand">
+		<%= image_tag '16x16/error.png', :alt => 'Error', :size => '16x16', :class => 'middle' %>
+		<%= error %>
+	</div>
+<% end -%>
+
+<% if notice -%>
+	<div class="notice_block hand">
+		<%= image_tag '16x16/notice.png', :alt => 'Notice', :size => '16x16', :class => 'middle' %>
+		<%= notice %>
+	</div>
+<% end -%>

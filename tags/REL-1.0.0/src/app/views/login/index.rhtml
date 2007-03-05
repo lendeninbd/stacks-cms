@@ -1,0 +1,33 @@
+<%= render :partial => 'shared/error_notice', :locals => { :error => flash[:error], :notice => flash[:notice] } %>
+
+<% form_tag do %>
+<table class="layout_table">
+<tr>
+	<td class="right"><label for="username">Username:</label></td>
+	<td><%= text_field_tag :username, @username, :class => 'fixed' %></td>
+</tr>
+<tr>
+	<td class="right"><label for="password">Password:</label></td>
+	<td><%= password_field_tag :password, '', :class => 'fixed' %></td>
+</tr>
+<tr>
+	<td></td>
+	<td>
+		<%= submit_tag 'Log In', :class => 'submit' %>
+		or
+		<% if session[:history] -%>
+			<a href="<%= session[:history] %>">cancel</a>
+		<% else -%>
+			<%= link_to 'cancel', :controller => 'blog' %>
+		<% end %>
+	</td>
+</tr>
+</table>
+
+<% end -%>
+
+<% if @username.blank? || !request.post? -%>
+	<%= javascript_tag "$('username').focus();" %>
+<% else -%>
+	<%= javascript_tag "$('password').focus();" %>
+<% end -%>

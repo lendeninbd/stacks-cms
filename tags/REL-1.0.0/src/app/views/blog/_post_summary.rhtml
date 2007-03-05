@@ -1,0 +1,4 @@
+<div class="post_summary<%= post_summary_counter.even? ? ' grey' : '' %>">
+	<h2><%= link_to_post post_summary %></h2>
+	<%= truncate(post_summary.raw_text, 200) %>
+</div>

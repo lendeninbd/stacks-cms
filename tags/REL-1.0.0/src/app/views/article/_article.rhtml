@@ -1,0 +1,12 @@
+<div id="article_<%= article.id %>" class="article">
+	<h1 class="article_header"><%= h(article.title) %></h1>
+	<p class="article_info">Written by <%= article.user.display_name %> on <%= article.created_at.strftime '%B %d, %Y at %H:%M' %></p>
+	<%= article.formatted_text %>
+	<% unless article.tags.blank? -%>
+		<p class="article_tags">Tagged under <%= article.tags.collect { |t| link_to_tag t }.to_sentence(:connector => '&', :skip_last_comma => true)%></p>
+	<% end -%>
+	<div id="license">
+		This work is licensed under a 
+		<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/">Creative Commons License</a>.
+	</div>
+</div>

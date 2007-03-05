@@ -1,0 +1,3 @@
+class CustomNotFoundError < Exception
+  
+end
