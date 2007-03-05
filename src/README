@@ -1,0 +1,43 @@
+This project is meant for personal websites.  It has two components.  First, it has a blog for posting site updates.  Second,  it has a wiki for storing personal articles.  All formatting for the blog and article components is done in Markdown.  The site supports full caching for optimal performance.  It also supports multiple users, so that you and your friends can keep the site up to date.
+
+Requirements
+------------
+
+* Ruby on Rails 1.2:  If your hosting provider doesn't support 1.2 yet, make sure you freeze this application before you try to use it.
+* BlueCloth 1.0 gem
+* A willingness to try my software
+
+Before You Run The Application
+------------------------------
+
+There are a bunch of settings you must change before you run the application.  After you perform the following, you will have your own personal wiki.
+
+### Database Setup ###
+
+First, edit `db/migrate/001_create_users.rb`.  A user is created here. Modify the user's settings to your desire, but make sure that `can_modify_users` and `receives_errors` are set to **true**.
+
+Next, copy the `db/database.yml.example` file to `db/database.yml`.  You will want to edit this to match your configuration.  Once you are done, run `rake db:migrate` to create your database.
+
+### Environment Setup ###
+
+Edit the `config/environment.rb` file.  Near the bottom is the *Titles* section.  Change each of these to what you desire.
+
+* `BLOG_TITLE` is displayed in the title for all blog pages
+* `BLOG_FEED_TITLE` is the title of the RSS feed for the blog
+* `BLOG_FEED_DESCRIPTION` is the description for the RSS feed
+* `ARTICLE_TITLE` is displayed in the title for all article pages
+
+The next section down is the *Limits* section.  These control the amount of items to display in certain areas.
+
+* `POSTS_ON_INDEX` is the amount of blog posts that appear on the main page
+* `POSTS_IN_FEED` is the amount of blog posts that appear in the RSS feed
+
+Last is the *Email* section.  `SEND FROM` is the email address that all emails from the system are sent from.  The next section is commented out, but if you need to specify email settings, they can done here.
+
+Credits
+-------
+
+* This software is written with the [Ruby on Rails](http://rubyonrails.org), which is released under the MIT license.
+* This software uses [Markdown](http://daringfireball.net/projects/markdown/license), which is released under a BSD license.  It is implemented by [Bluecloth](http://www.deveiate.org/projects/BlueCloth), which is released under the GPL.
+* The icons are from the [Tango Project](http://tango.freedesktop.org/Tango_Desktop_Project).  They are licensed under a Creative Commons license.
+* The header was image taken by Stephen Gerstacker (me).  It is licensed under the Creative Commons Attribution-Noncommercial Share Alike 3.0 license.
