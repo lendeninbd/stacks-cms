@@ -1,0 +1,23 @@
+<% @page_title = "What's Tagged Under #{@tag.name}? - #{BLOG_TITLE}" -%>
+<% @blog_controls << link_to('Create A New Post', :action => :new) -%>
+<% @blog_controls << link_to('Log Out', :controller => 'login', :action => 'logout') -%>
+<% @show_tags = true -%>
+
+<h1>What's Tagged Under <%= @tag.name %>?</h1>
+
+<% if @tag.blank? -%>
+	<p>This tag does not exist.</p>
+<% else -%>
+	<% cache("blog/tag/#{@tag.name}") do -%>
+		<% unless @posts.blank? -%>
+			<h2>Blog Posts</h2>
+			<%= render :partial => 'post_summary', :collection => @posts %>
+			<br />
+		<% end -%>
+	
+		<% unless @articles.blank? -%>
+			<h2>Articles</h2>
+			<%= render :partial => 'article/article_summary', :collection => @articles %>
+		<% end -%>
+	<% end -%>
+<% end -%>

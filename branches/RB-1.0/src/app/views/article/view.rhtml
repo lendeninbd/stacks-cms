@@ -1,0 +1,20 @@
+<% @page_title = "#{h(params[:title])} - #{ARTICLE_TITLE}" -%>
+<% @show_tags = true -%>
+<% if session[:user] && !@article.blank? -%>
+	<% @article_controls << link_to('Delete This Article', { :action => :delete, :id => @article }, :confirm => "Are you sure you want to delete '#{@article.title}'")%>
+<% end -%>
+<% @article_controls << link_to('Edit This Article', :action => :edit, :title => params[:title]) -%>
+<% @article_controls << link_to('Log Out', :controller => 'login', :action => 'logout') -%>
+
+<% if @article.blank? -%>
+	<div class="article">
+		<h1 class="article_header">This Article Doesn't Exist, Yet...</h1>
+		<% if session[:user] -%>
+			<p>To create the article <em><%= h(params[:title]) %></em>, go ahead and edit it.</p>
+		<% else -%>
+			<p>If you want to create <em><%= h(params[:title]) %></em>, you'll have to log in first.</p>
+		<% end -%>
+	</div>
+<% else -%>
+	<%= render :partial => 'article', :object => @article %>
+<% end -%>

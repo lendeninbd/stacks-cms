@@ -1,0 +1,24 @@
+<% @article_controls << link_to('Go Back To The Article', session[:history]) -%>
+<% if @new_record 
+	@page_title = "Creating '#{@article.title}'"
+else
+	@page_title = "Editing '#{@article.title}'"
+	@article_controls << link_to('Delete This Article', { :action => :delete, :id => @article }, :confirm => "Are you sure you want to delete '#{@article.title}'")
+end	-%>
+<% @article_controls << link_to('Log Out', :controller => 'login', :action => 'logout') -%>
+
+<h1><%= h(@article.title) %></h1>
+
+<%= render :partial => 'shared/error_notice', :locals => { :error => flash[:error], :notice => flash[:notice] } %>
+
+<% form_for :article, @article, :url => { :action => :edit } do |f| %>
+	<p>
+		<label for="article_markdown_text">Markdown Text:</label><br />
+		<%= f.text_area :markdown_text, :class => 'fixed', :cols => 70, :rows => 24 %>
+	</p>
+	<p>
+		<label for="tag_list">Tags:</label><br />
+		<%= text_field_tag 'tag_list', @article.tags.collect {|t| t.name }.join(' '), :autocomplete => 'off', :class => 'fixed' %>
+		<%= submit_tag 'Save Article', :class => 'submit' %>
+	</p>
+<% end -%>
