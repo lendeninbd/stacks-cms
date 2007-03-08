@@ -1,0 +1,28 @@
+<% @page_title = "Edit Post '#{@post.title}'" -%>
+<% @blog_controls << link_to('Go Back To The Post', session[:history]) -%>
+<% @blog_controls << link_to('Delete This Post', { :action => :delete, :id => @post }, :confirm => "Are you sure you want to delete '#{@post.title}'")%>
+<% @blog_controls << link_to('Log Out', :controller => 'login', :action => 'logout') -%>
+
+<h1>Edit Post '<%= @post.title %>'</h1>
+
+<%= render :partial => 'shared/error_notice', :locals => { :error => flash[:error], :notice => flash[:notice] } %>
+
+<% form_for :post, @post, :url => { :action => :edit } do |f| %>
+	<p>
+		<label for="post_title">Title:</label><br />
+		<%= f.text_field :title, :class => 'fixed' %>
+	</p>
+	<p>
+		<label for="post_markdown_text">Markdown Text:</label><br />
+		<%= f.text_area :markdown_text, :class => 'fixed', :cols => 70, :rows => 24 %>
+	</p>
+	<p>
+		<label for="tag_list">Tags:</label><br />
+		<%= text_field_tag 'tag_list', @post.tags.collect {|t| t.name }.join(' '), :autocomplete => 'off', :class => 'fixed' %>
+		<%= submit_tag 'Save Post', :class => 'submit' %>
+	</p>
+<% end -%>
+
+<% if request.get? -%>
+	<%= javascript_tag "$('post_title').focus();" %>
+<% end -%>

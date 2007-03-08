@@ -1,0 +1,14 @@
+<div id="post_<%= post.id %>" class="post">
+	<h1 class="post_header"><%= link_to_post post %></h1>
+	<p class="post_info">Written by <%= post.user.display_name %> on <%= post.created_at.strftime '%B %d, %Y at %H:%M' %></p>
+	<%= post.formatted_text %>
+	<% unless post.tags.blank? -%>
+		<p class="post_tags">Tagged under <%= post.tags.collect { |t| link_to_tag t }.to_sentence(:connector => '&', :skip_last_comma => true)%></p>
+	<% end -%>
+	<% unless @hide_license -%>
+		<div id="license">
+			This work is licensed under a 
+			<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/">Creative Commons License</a>.
+		</div>
+	<% end -%>
+</div>
