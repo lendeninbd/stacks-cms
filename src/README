@@ -1,5 +1,10 @@
 This project is meant for personal websites.  It has two components.  First, it has a blog for posting site updates.  Second,  it has a wiki for storing personal articles.  All formatting for the blog and article components is done in Markdown.  The site supports full caching for optimal performance.  It also supports multiple users, so that you and your friends can keep the site up to date.
 
+Links
+-----
+* The main site for this software is at [http://www.shortround.net/article/view/Stack%27s+CMS](http://www.shortround.net/article/view/Stack%27s+CMS).  This is also a working copy of the software, if you would like to see it running.
+* The source code is also stored on [Google Code](http://code.google.com/p/stacks-cms).
+
 Requirements
 ------------
 
